@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>레이아웃</title>
+    
+</head>
+<style>
+   @font-face {
+        font-family: 'KCC-Hanbit';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    ul {
+        list-style: none;
+    }
+    #container {
+        font-family: 'KCC-Hanbit';
+        width: 1080px;
+        margin: 0 auto;
+    }
+    #header {
+        padding: 10px 40px;
+        color: #103949;
+        text-shadow: 4px 4px 5px #3c5757;
+    }
+    #nav {
+        line-height: 10px;
+        background-color: #7AB2B2;
+        display: flex;
+        justify-content: space-between;
+    }
+    #nav > ul {
+        padding-right: 40px;
+        display: flex;
+    }
+    #nav > ul > li {
+        padding: 15px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    #wrap {
+        background-color: #EEF7FF;
+        display: flex;
+    }
+    #sidebar {
+        width: 200px;
+    }
+    #sidebar > ul {
+        padding: 0;
+    }
+    #sidebar > ul > li{
+        padding: 15px;
+        font-weight: 600;
+    }
+    #sidebar::after {
+        content: '';
+        border-right: 3px solid rgb(20, 68, 50);
+        height: 80%;
+        margin: 10px 0;
+        display: block;
+    }
+    #content {
+        width: 880px;
+        padding-left: 30px;
+    }
+    #footer {
+        line-height: 100px;
+        background-color: #CDE8E5;
+        text-align: right;
+        padding-right: 30px;
+    }
+</style>
+<body>
+    <div id="container">
+        <header id="header">
+            <h1>One-True Layout</h1>
+        </header>
+        <!-- //header -->
+
+        <nav id="nav">
+            <ul>
+                <li>Home</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ul>
+            <ul>
+                <li>Login</li>
+                <li>Sign up</li>
+            </ul>
+        </nav>
+        <!-- //nav -->
+
+        <div id="wrap">
+            <aside id="sidebar">
+                <ul>
+                    <li>Home</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>jQuery</li>
+                </ul>
+            </aside>
+            <main id="content">
+                <h2>문서의 일반적인 흐름</h2>
+                <p>
+                    가장 기본적인 HTMl 요소 배치 방식으로, HTMl 요소가 공간 차지 형식(표시 형식)에 따라 DOM에 나온 순서대로 차근차근 배치되는 방식
+                    <br>
+                    자식 요소와 내부 텍스트는 컨테이닝 블록(containing block)에 배치되며, 컨테이닝 블록의 좌상단을 기준으로 배치된다.
+                </p>
+                <br>
+                
+                <h2>문서의 일반적인 흐름에서 블록(block) 형식 요소의 배치</h2>
+                <p>
+                    블록 형식 요소는 컨테이닝 블록의 맨 위에서부터 아래로 하나씩 배치된다.
+                    <br>
+                    블록 형식 요소는 컨테이닝 블록의 왼쪽에서부터 공간을 차지하며, 수평 방향에 포함된 모든 빈 공간을 차지한다. 그래서 컨테이닝 블록 내부를 최대한 차지하게 된다.
+                </p>
+                <br>
+                <h2>문서의 일반적인 흐름에서 인라인(inline) 형식 요소의 배치</h2>
+                <p>
+                    인라인 형식 요소는 컨테이닝 블록의 상단에서 수평으로 하나씩 배치된다
+                </p>
+                
+                <p>컨테이닝 블록은 position 스타일 속성에 따라 결정되며, position 스타일 속성의 값이 기본 값인 "static"이면 가장 가까운 블록레벨 조상 요소의 콘텐트 영역이 컨테이닝 블록이 된다.</p>
+            </main>
+        </div>
+        <!-- //wrap -->
+
+        <footer id="footer"><span>SBS 아카데미 이혜빈</span></footer>
+        <!-- //footer -->
+
+    </div>
+    <!-- //container -->
+</body>
+</html>

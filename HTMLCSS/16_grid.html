@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Grid사용</title>
+    <style>
+        #container {
+            width: 640px;
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 100px auto;
+            display: grid;
+            gap: 20px;
+            grid-template-areas: 
+            "Yellow Yellow Yellow"
+            "Pink Cyan Gold"
+            ;
+            grid-template-columns: 200px 200px 200px;
+        }
+        #container > div {
+            line-height: 200px;
+            text-align: center;
+        }
+        /* #container > div:not(:first-child){
+            width: 200px;
+        } */
+        #container > div:nth-child(1) {
+            background-color: yellowgreen;
+            grid-area: Yellow;
+        }
+        #container > div:nth-child(2) {
+            background-color: pink;
+            grid-area: Pink;
+        }
+        #container > div:nth-child(3) {
+            background-color: cyan;
+            grid-area: Cyan;
+        }
+        #container > div:nth-child(4) {
+            background-color: gold;
+            grid-area: Gold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div>Yellowgreen</div>
+        <div>Pink</div>
+        <div>Cyan</div>
+        <div>Gold</div>
+    </div>
+</body>
+</html>

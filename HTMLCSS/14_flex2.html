@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS flexible Box 레이아웃 02</title>
+        <style>
+            #container {
+                width: 460px;
+                border: 2px solid #333;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                padding: 20px 0;
+            }
+            #container > div {
+                width: 200px;
+                height: 200px;
+                text-align: center;
+                line-height: 200px;
+            }
+            #container > div:nth-child(1) {
+                background-color: pink;
+                margin-bottom: 20px;
+            }
+            #container > div:nth-child(2) {
+                background-color: yellowgreen;
+                margin-bottom: 20px;
+            }
+            #container > div:nth-child(3) {
+                background-color: cyan;
+            }
+            #container > div:nth-child(4) {
+                background-color: gold;
+            }
+        </style>
+    </head>
+    <body>
+        <span id="container">
+            <div>Pink</div>
+            <div>Yellowgreen</div>
+            <div>Cyan</div>
+            <div>Gold</div>
+        </span>
+    </body>
+</html>

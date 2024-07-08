@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>margin, padding, 가운데 정렬 활용</title>
+    <style>
+        /* #profile {
+            width: 500px;
+            margin: auto;
+            background-color: #eee;
+        }
+        #profile > img {
+            display: block;
+            margin: auto;
+            padding: 30px;
+            border-radius: 50%;
+        } 내가 적은 실패한 숙제*/
+
+        #profile {
+            background-color: #eee;
+            padding: 30px;
+            /* 
+                이미지 크기가 340px이라 직접 340px을 줬음
+                만약 이미지보다 큰 값을 주게 되면 이미지에는 
+                컨테이닝 블럭 너비만큼 너비를 설정해주면 돼서
+                img style에 width: 100% 를 주면 됨
+             */
+            width: 340px;
+
+            /* 너비가 설정된 HTMl 요소를 컨테이닝 블록의 가운데에 배치 */
+            margin: auto;
+        }
+        #profile > img {
+            /* border-radius 스타일 속성: 둥근 모서리를 설정 */
+            /* border-radius 스타일 속성의 최댓값은 HTML 요소 크기의 절반을 넘을 수 없다 */
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="profile">
+        <img src="egg.jpg" alt="EggImage">
+    </div>
+</body>
+</html>

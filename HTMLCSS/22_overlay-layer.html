@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>반투명한 오버레이 레이어</title>
+    <link rel="stylesheet" href="https://mooozi.github.io/css/reset.css">
+    <style>
+        #container {
+            height: 100vh;
+            width: 100vw;
+            background-image: url('https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-repeat: repeat;
+            background-size: cover;
+            position: fixed;
+        }
+        #main {
+            width: 1500px;
+            margin: 100px auto;
+        }
+        #main > h1 {
+            font-size: 40px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+            letter-spacing: -1px;
+        }
+        #main > p {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 2;
+        }
+        #overlay {
+            background: rgba(1, 1, 1, 0.3);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        #overlay-alert {
+            width: 500px;
+            background-color: #b6b6b6;
+            padding: 2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #overlay-alert > div {
+            background-color: #585858;
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+            font-weight: bolder;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #overlay-alert > p {
+            padding: 50px;
+            font-size: 20px;
+            line-height: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="main">
+            <h1>1914 translation by H. Rackham</h1>
+            <p>
+                "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains." Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.
+                Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin. Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt eget. Leo a diam sollicitudin tempor id. A lacus vestibulum sed arcu non odio euismod lacinia. In tellus integer feugiat scelerisque. Feugiat in fermentum posuere urna nec tincidunt praesent. Porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nisi scelerisque eu ultrices vitae auctor eu augue ut lectus. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus. Et malesuada fames ac turpis egestas sed. Sit amet nisl suscipit adipiscing bibendum est ultricies. Arcu ac tortor dignissim convallis aenean et tortor at. Pretium viverra suspendisse potenti nullam ac tortor vitae purus. Eros donec ac odio tempor orci dapibus ultrices. Elementum nibh tellus molestie nunc. Et magnis dis parturient montes nascetur. Est placerat in egestas erat imperdiet. Consequat interdum varius sit amet mattis vulputate enim.
+                
+            </p>
+        </div>
+        <div id="overlay">
+            <div id="overlay-alert">
+                <div><span>Alert!</span></div>
+                <p>
+                    이것은 메시지 창입니다. <br>
+                    오버레이 레이어 위에 올라와있습니다. <br>
+                    그래서 오버레이 레이어와 함께 나타났다 사라집니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
