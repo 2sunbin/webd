@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>타이머1</title>
+</head>
+<body>
+    <script>
+        // 연습문제 1번
+        console.log('2초마다 콘솔에 "red", "green", "blue",... 와 같이 바뀌는 값 하나씩 출력');
+        var color = ['red', 'green', 'blue'];
+        var i = 0;
+            setInterval(function(){
+                console.log(`background-color: ${color[i++]};`);
+                if(i == color.length){
+                    i = 0;
+                }
+            },2000);
+    </script>
+</body>
+</html>

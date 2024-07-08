@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>뉴스티커</title>
+    <link rel="stylesheet" href="reset .css">
+    <style>
+        #newsTicker {
+            border: 5px solid greenyellow;
+            width: 300px;
+            margin: 100px auto;
+            height: 2em;
+            overflow: hidden;
+        }
+        #newsTicker > ul > li {
+            line-height: 2;
+            padding-left: 20px;
+            
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            transition-duration: 2000ms;
+            transition-property: height;
+        }
+    </style>
+</head>
+<body>
+    <div id="newsTicker">
+        <ul>
+            <li>1. Time is gold.</li>
+            <li>2. No sweat, no sweet.</li>
+            <li>3. Asking costs nothing.</li>
+            <li>4. Step by step goes a long way.</li>
+            <li>5. You will never know until you try.</li>
+        </ul>
+    </div>
+    <script>
+        var newsList = document.querySelector('#newsTicker > ul');
+        var i = 1;
+        window.setInterval(function() {
+            newsList.style.transition = 'all 1000ms';
+            newsList.style.marginTop = i * -2 + 'em';
+            i++;
+
+            if(i == 5){
+                setTimeout(function() {
+                    newsList.style.transition = '0ms';
+                    newsList.style.marginTop = '0';
+                    i = 0;
+                },2000);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

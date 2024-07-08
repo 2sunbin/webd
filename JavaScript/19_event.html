@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="step">Step by step goes a long way.</h1>
+    <p>
+        <button type="button" id="toggle">TOGGLE</button>
+    </p>
+    <script>
+        const step = document.getElementById('step');
+        const toggle = document.getElementById('toggle');
+
+        toggle.onclick = function() {
+            if(this.innerText == 'RESET'){
+                step.style.color = '';
+                this.innerText = 'TOGGLE';
+            }else{
+                step.style.color = 'red';
+                this.innerText = 'RESET';
+            }
+        };
+    </script>
+</body>
+</html>

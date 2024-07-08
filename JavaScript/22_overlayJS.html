@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>오버레이 레이아웃 JS</title>
+    <style>
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(42, 42, 42, 0.9);
+
+            display: none;
+        }
+        #overlay > img {
+            position: absolute;
+            width: 1000px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+        }
+
+        #thumbnails{
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        #thumbnails > li > img {
+            width: 250px;
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function() {
+            const thumbnails = document.querySelectorAll('#thumbnails > li > img');
+            const overlay = document.getElementById('overlay');
+            const overlayImg = document.querySelector('#overlay > img');
+
+            // 썸네일 클릭할 때 overlay 나오게 하는 기능
+            for(let i = 0; i < thumbnails.length; i++){
+                thumbnails[i].addEventListener('click', function() {        
+                    overlay.style.display = 'block';
+                    overlayImg.src = this.src;
+                });
+            }
+            // overlay 창 클릭했을 때 닫히는 기능
+            overlay.addEventListener('click', function() {
+                overlay.style.display = '';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="overlay">
+        <img src="#" alt="메인이미지">
+    </div>
+    <ul id="thumbnails">
+        <li><img src="https://i.imgur.com/7Mu8BZg.png" alt="이미지1"></li>
+        <li><img src="https://i.imgur.com/kwD72gU.png" alt="이미지2"></li>
+        <li><img src="https://i.imgur.com/qOU9yuQ.png" alt="이미지3"></li>
+        <li><img src="https://i.imgur.com/YfsvbdE.png" alt="이미지4"></li>
+        <li><img src="https://i.imgur.com/3KWpPQv.png" alt="이미지5"></li>
+    </ul>
+</body>
+</html>

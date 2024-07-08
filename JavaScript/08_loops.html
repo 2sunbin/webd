@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        // 연습문제 1
+        var num = 8;
+        console.group('Do your best! 문자열을 변수 num에 해당하는 횟수만큼 출력')
+        for(var i = 1; i <= num; i++) {
+            console.log('%d. Do your best!', i);
+        }
+        console.groupEnd();
+        
+
+
+        // 연습문제 2
+        var num = 5;
+        console.group('변수 num에서부터 1까지의 자연수를 역순으로 출력');
+        for(var i = 0; i < num; num-- ) {
+            console.log(num);
+        }
+        console.groupEnd();
+
+        var num = 5;
+        console.group('변수 num에서부터 1까지의 자연수를 역순으로 출력2');
+        for(var i = 0; num > i; num-- ) {
+            console.log(num);
+        }
+        console.groupEnd();
+
+        var num = 5;
+        console.group('변수 num에서부터 1까지의 자연수를 역순으로 출력3');
+        for(var i = num; i >= 1; i-- ) {
+            console.log(i);
+        }
+        console.groupEnd();
+    </script>
+</body>
+</html>

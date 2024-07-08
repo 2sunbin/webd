@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>News Ticker</title>
+    <style>
+        #newsTicker {
+            width: 500px;
+            border: 5px solid green;
+            margin: 100px auto;
+        }
+        #newsTicker > ul > li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="newsTicker">
+        <ul>
+            <li>1. Time is gold.</li>
+            <li>2. No sweat, no sweet.</li>
+            <li>3. Asking costs nothing.</li>
+            <li>4. Step by step goes a long way.</li>
+            <li>5. You will never know until you try.</li>
+        </ul>
+    </div>
+
+    <script>
+        var newsTicker = document.querySelectorAll('#newsTicker > ul > li');
+        var j = 1;
+        for(var i = 1; i < newsTicker.length; i++){
+                    newsTicker[i].style.display = 'none';
+            }
+        newsTicker[0].style.display = 'block';
+
+        setInterval(function() {
+            for(var i = 0; i < newsTicker.length; i++){
+                newsTicker[i].style.display = 'none';
+            }
+            
+            newsTicker[j++].style.display = 'block';
+            j = j % newsTicker.length;
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>조건문</title>
+</head>
+<body>
+    <script>
+        var num = 28;
+        // 연습문제 1
+        console.group("1. num이 짝수(even)인지 홀수(odd)인지");
+
+
+        if(num % 2 == 0) {
+            console.log("%d is an even number.", num);
+        }else {
+            console.log("%d is an odd number.", num);
+        }
+
+        console.groupEnd();
+
+        
+        var x = 16;
+        var y = 29;
+        // 연습문제 2
+        console.group("2. 큰 수에서 작은 수 빼기 ");
+
+
+        if(x > y) {
+            console.log("%d - %d = %d", x,y,x-y);
+        }else {
+            console.log("%d - %d = %d", y,x,y-x);
+        }
+
+        console.groupEnd();
+    </script>
+</body>
+</html>

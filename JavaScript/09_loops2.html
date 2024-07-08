@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 연습문제1. 배열 favorites에서, 원소가 "Coffee"또는 "Tea"인 원소의 인덱스와 값을 출력
+        var favorites = ['Coffee', 'Juice', 'Coke', 'Milk', 'Tea'];
+        console.group('배열 favorites에서, 원소가 "Coffee"또는 "Tea"인 원소의 인덱스와 값을 출력');
+        for(var i = 0; i < favorites.length; i++){
+            if(favorites[i] == 'Coffee' || favorites[i] == 'Tea'){
+                console.log('%d. %s', i, favorites[i]);
+            }
+        }
+        console.groupEnd();
+
+
+        // 연습문제2. 배열 favorites에서, 원소가 "Coke"인 경우에는 "Soft Drink"를 출력하고, 그렇지 않으면 원소를 그대로 출력
+        var favorites = ['Coffee', 'Juice', 'Coke', 'Milk', 'Tea'];
+        console.group('배열 favorites에서, 원소가 "Coke"인 경우에는 "Soft Drink"를 출력하고, 그렇지 않으면 원소를 그대로 출력');
+        for(var i = 0; i < favorites.length; i++){
+            if(favorites[i] == 'Coke'){
+                console.log('Soft Drink');
+            }else{
+                console.log(favorites[i]);
+            }
+        }
+        console.groupEnd();
+
+
+        // 연습문제2. 배열 colors을 이용해 color 스타일 속성을 설정하는 것처럼 출력
+        var color = ['red', 'green', 'blue', 'yellow', 'orange'];
+        console.group('배열 colors을 이용해 color 스타일 속성을 설정하는 것처럼 출력');
+        for(var i = 0; i < color.length; i++){
+            console.log('color: %s;', color[i]);
+        }
+        console.groupEnd();
+    </script>
+</body>
+</html>

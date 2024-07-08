@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num = 15;
+        console.group('3의 배수: Fizz, 5의 배수: Buzz, 3의 배수이고 5의 배수: FizzBuzz, 앞 조건에 해당하지 않는 경우: 숫자');
+        if(num % 3 == 0 && num % 5 == 0){
+            console.log("FizzBuzz");
+        }else if(num % 3 == 0){
+            console.log("Fizz");
+        }else if(num % 5 == 0){
+            console.log("Buzz");
+        }else {
+            console.log(num);
+        }
+        console.groupEnd();
+    </script>
+</body>
+</html>

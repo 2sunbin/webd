@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>썸네일 이미지</title>
+    <style>
+        #mainthumbnail {
+            display: block;
+            width: 1000px;
+            margin: 100px auto;
+        }
+        #thumbnails {
+            display: flex;
+            justify-content: center;
+        }
+        #thumbnails > img {
+            display: block;
+            margin: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <img id = "mainthumbnail" src="https://i.imgur.com/7Mu8BZg.png" alt="메인썸네일자리">
+    <div id="thumbnails">
+        <img src="https://i.imgur.com/7Mu8BZg.png" alt="썸네일1">
+        <img src="https://i.imgur.com/kwD72gU.png" alt="썸네일2">
+        <img src="https://i.imgur.com/qOU9yuQ.png" alt="썸네일3">
+        <img src="https://i.imgur.com/YfsvbdE.png" alt="썸네일4">
+        <img src="https://i.imgur.com/3KWpPQv.png" alt="썸네일5">
+    </div>
+    <script>
+        const thumbnails = document.querySelectorAll('#thumbnails > img');
+        const mainThumbnail = document.getElementById('mainthumbnail');
+        
+        for(var i = 0; i < thumbnails.length; i++){
+            
+            thumbnails[i].addEventListener('click', function() {
+                // console.log(thumbnails[i]); 이건 왜 안되는걸까요?
+                
+                // console.log(this.src);
+                // console.log(mainThumbnail.src)
+
+                console.log(i);
+                mainThumbnail.src = this.src;
+            });
+        }
+    </script>
+</body>
+</html>

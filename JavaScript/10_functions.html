@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>
+</head>
+<body>
+    <script>
+        console.group('정수 2개를 전달 받아, 두 정수의 평균을 구해 반환하는 함수를 선언하고, 31과 17의 평균 출력');
+        function getAverage(x, y) {
+            return (x + y)/2;
+        }
+        console.log(`The average of 31 and 17 = ${getAverage(31, 17)}`);
+        console.groupEnd();
+
+        function number() {
+        var num = 10;     // 지역 변수로 함수 내에서만 접근 가능함. 함수 본체의 실행이 끝나면 소멸
+        console.log('num = ', num);
+     }
+     number();
+     console.log('num = ', num);
+    </script>
+</body>
+</html>

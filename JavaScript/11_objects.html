@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>객체</title>
+</head>
+<body>
+    <script>
+        console.group('가로:13, 세로:8인 직사각형인 rect 객체 생성, getArea 메서드 추가 후 rect객체의 넓이를 구해 출력');
+        var rect = {
+            width : 13,
+            height : 8,
+
+            getArea : function() {
+                return this.width * this.height;
+            }
+        };
+        console.log(rect.getArea());
+
+        console.groupEnd();
+    </script>
+</body>
+</html>
