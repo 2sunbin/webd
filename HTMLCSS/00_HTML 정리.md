@@ -242,6 +242,8 @@ HTML(Hyper-Text Markup Language)
 ##### 표는 HTML 문서에서 구조가 가장 복잡한 콘텐츠라 반드시 필요한 경우에만 사용
 #### 예제: 02_table.html
 
+<br>
+
 >> ### 2-4. 이미지 태그
 - `<img>`: 이미지 삽입
 - 이미지 설정 두 가지 방법
@@ -251,3 +253,5 @@ HTML(Hyper-Text Markup Language)
 ```HTML
 <img src="이미지 경로" alt="이미지가 안 보일 때 대체 텍스트">
 ```
+
+#### 예제: 03_img.html
