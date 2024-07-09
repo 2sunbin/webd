@@ -11,6 +11,7 @@
 [2. HTML의 태그](#2-html의-태그)
 
 - [2-1. 글자 태그](#2-1-글자-태그)
+- [2-2. 목록 태그](#2-2-목록-태그)
 
 
 </details>
@@ -25,12 +26,13 @@ HTML(Hyper-Text Markup Language)
 
 - 웹 브라우저에 표시되도록 설계된 문서의 표준 마크업 언어
     ##### 마크업 언어 : 태그 등을 이용해 문서나 데이터의 구조를 명시하기 위한 규칙을 정리한 언어
-        
+
+<br>
 
 >> ### 1-1. HTML의 기본 구성
 
 |요소|의미|예시|
-|----|----|----|
+|-|-|-|
 |태그(tag)|'<>'로 둘러싸인 문자열로 시작태그(<>)와 종료태그(</>)로 구성|**<h1<k>></h1<k>>**|
 |내용(content)|태그로 둘러싸인 문자열|<h1<k>>**Hi**</h1<k>>|
 |요소(element)|태그와 내용을 다 포함한 전체 문자열, HTML문서의 기본 구성 단위|**<h1<k>>Hi</h1<k>>**|
@@ -82,11 +84,13 @@ HTML(Hyper-Text Markup Language)
 
 - '<>'로 둘러싸인 문자열로 시작태그(<>)와 종료태그(</>)로 구성
 
+<br>
+
 >> ### 2-1. 글자 태그
 - HTML 문서에서 가장 큰 비중을 차지
 
 |종류|태그|
-|----|----|
+|-|-|
 |제목|`<h1>~<h6>`|
 |본문|`<p>, <br>, <hr>`|
 |앵커|`<a>`|
@@ -148,3 +152,73 @@ HTML(Hyper-Text Markup Language)
     - `<mark>` : highlighted text로 지정
     - `<sub>` : 기본 글자보다 아래에 쓰인 텍스트로 지정
     - `<sup>` : 기본 글자보다 위에 쓰인 텍스트로 지정
+
+<br>
+
+>> ### 2-2. 목록 태그
+- 비슷한 것들끼리 묶어서 사용
+
+|태그|의미|설명|
+|-|-|-|
+|`<ul>`|unordered list|순서가 없는 목록|
+|`<ol>`|ordered list|순서가 있는 목록|
+|`<li>`|list item|목록 요소|
+|`<dl>`|definition list|정의 목록|
+|`<dt>`|definition term|정의 용어|
+|`<dd>`|definition description|정의 설명|
+
+##### `<ul>`요소나 `<ol>`요소에는 `<li>`요소만 들어갈 수 있음
+##### `<dl>`요소에는 `<dt>`요소와 `<dd>`요소만 들어갈 수 있음
+
+- `<ul>` : 순서가 없는 목록(unordered list)
+    
+    ```HTML
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+    </ul>
+    ```
+
+- `<ol>` : 순서가 있는 목록(ordered list)
+    
+    ```HTML
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+    </ol>
+    ```
+
+- 중첩된 목록: 목록 안에 목록이 들어가는 형태
+    
+    ```HTML
+    <ul>
+        <li>HTML
+            <!-- 안쪽 목록은 반드시 <li>요소 안에 들어가야 함 -->
+            <ul>
+                <li>HTML Tutorial</li>
+                <li>HTML Elements</li>
+            </ul>
+        </li>
+        <li>CSS
+            <ul>
+                <li>CSS Tutorial</li>
+                <li>CSS blocks</li>
+            </ul>
+        </li>
+    </ul>
+    ```
+
+- `<dl>` : 정의 목록(definition list)
+    
+    ```HTML
+    <!-- 정의 목록 -->
+    <dl>
+        <!-- 정의 용어 -->
+        <dt>HTML</dt>
+
+        <!-- 용어 설명 -->
+        <dd>HTML stands for Hyper Text Markup Language</dd>
+        <dd>HTML describes the structure of a Web page</dd>
+    </dl>
+    ```
+
