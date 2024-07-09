@@ -1,1 +1,69 @@
 # 📃 HTML
+
+<details>
+<summary>목차</summary>
+
+[1. HTML이란 무엇일까요?](#1-html이란-무엇일까요?)
+
+- [1-1. HTML의 기본 구성](#1-1-html의-기본-구성)
+
+</details>
+
+<br>
+
+---
+---
+
+> ## 1. HTML이란 무엇일까요?
+
+- 웹 브라우저에 표시되도록 설계된 문서의 표준 마크업 언어
+    ##### 마크업 언어 : 태그 등을 이용해 문서나 데이터의 구조를 명시하기 위한 규칙을 정리한 언어
+        
+
+>> ### 1-1. HTML의 기본 구성
+
+```html
+<!DOCTYPE html>
+
+<html lang = "ko">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>문서 제목</title>
+        <link rel="stylesheet" href="#">
+        <style> /* CSS 적는 공간 */ </style>
+        <script> // script 적는 공간(jQuery, JavaScript 등) </script>
+    </head>
+
+    <body>
+        <!-- 여기 적힌 것들이 뷰포트에 나옴 -->
+    </body>
+</html>
+```
+- `<!DOCTYPE html>`
+    - 
+    문서 형식(document type) 선언: 브라우저에게 이 문서가 HTML5 문서임을 알림
+
+- `<html>`
+    - 
+    `<html>` 요소: HTML 문서의 최상위 요소
+
+- `<head>`
+    - 
+    `<head>` 요소: HTML 문서의 정보를 표현하는 요소들의 묶음
+
+    - `<meta>`
+        HTML 문서의 메타 데이터를 표현 
+    - `<title>`
+        HTML 문서의 제목 
+    - `<link>`
+        HTML 문서에 다른 파일 연결(외부 CSS파일 등)
+    - `<style>`
+        HTML 문서에 스타일 시트 추가(CSS 적는 공간)
+    - `<script>`
+        HTML 문서에 스크립트 추가      
+
+
+- `<body>`
+    - 
+    `<body>` 요소: 브라우저 화면(viewport)에 표시되는 요소들의 묶음
