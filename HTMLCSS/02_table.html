@@ -51,5 +51,42 @@
             <!-- <tfoot>: 푸터 행들(생략 가능)-->
             <!-- <tfoot></tfoot> -->
         </table>
+
+        <hr>
+
+
+
+        <h1>Merge cells in a table</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Header1</th>
+                    <th>Header2</th>
+                    <th>Header3</th>
+                    <th>Header4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data 1-1</td>
+                    <td>Data 1-2</td>
+                    <!-- colspan 속성: 열(colums) 확장 -->
+                    <td colspan="2">Data 1-3</td>
+                    <!-- <td>Data 1-4</td> -->
+                </tr>
+                <tr>
+                    <!-- rowspan 속성: 행(rows) 확장 -->
+                    <td rowspan="2">Data 2-1</td>
+                    <td>Data 2-2</td>
+                    <td>Data 2-3</td>
+                    <td>Data 2-4</td>
+                </tr>
+                <tr>
+                    <td>Data 3-2</td>
+                    <td>Data 3-3</td>
+                    <td>Data 3-4</td>
+                </tr>
+            </tbody>
+        </table>
 </body>
 </html>
