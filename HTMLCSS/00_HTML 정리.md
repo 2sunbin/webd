@@ -12,6 +12,7 @@
 
 - [2-1. 글자 태그](#2-1-글자-태그)
 - [2-2. 목록 태그](#2-2-목록-태그)
+- [2-3. 표 태그](#2-3-표-태그)
 
 
 </details>
@@ -221,4 +222,21 @@ HTML(Hyper-Text Markup Language)
         <dd>HTML describes the structure of a Web page</dd>
     </dl>
     ```
+#### 예제: 01_list.html    
 
+<br>
+
+>> ### 2-3. 표 태그
+
+|태그|의미|설명|
+|-|-|-|
+|`<table>`||표(Table)를 작성하기 위한 기본 태그|
+|`<thead>`|table header|표의 제목 행들의 묶음(생략 가능)|
+|`<tbody>`|table body|표의 본문 행들의 묶음(생략 불가능)|
+|`<tfoot>`|table footer|표의 푸터 행들의 묶음(생략 가능)|
+|`<tr>`|table row|표의 행(row) 표현|
+|`<th>`|table header|표의 제목 셀을 표현|
+|`<td>`|table data|표의 본문 셀을 표현|
+
+##### 표는 HTML 문서에서 구조가 가장 복잡한 콘텐츠라 반드시 필요한 경우에만 사용
+#### 예제: 02_table.html

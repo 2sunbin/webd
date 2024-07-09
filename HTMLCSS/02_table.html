@@ -6,9 +6,16 @@
     </head>
     <body>
         <h1>천하대학교 웹학과 성적</h1>
+        <!-- <table>: 표를 표현 -->
+        <!-- border 속성은 HTML5 문서에서는 사용할 수 없는데 
+             CSS따로 안 주고 보기 편하게 적어놓음(border쓰지 마세요)
+        -->
         <table border="1">
+            <!-- <thead>: 제목 행들의 묶음(생략 가능) -->
             <thead>
+                <!-- <tr>: 표의 행(rows) -->
                 <tr>
+                    <!-- <th>: 표의 제목 셀(header) -->
                     <th>이름</th>
                     <th>HTML</th>
                     <th>CSS</th>
@@ -16,8 +23,10 @@
                     <th>jQuery</th>
                 </tr>
             </thead>
+            <!-- <tbody>: 본문 행들(생략 불가) -->
             <tbody>
                 <tr>
+                    <!-- <td>: 표의 본문 셀(data) -->
                     <td>김철수</td>
                     <td>A</td>
                     <td>B</td>
@@ -39,6 +48,8 @@
                     <td>C</td>
                 </tr>
             </tbody>
+            <!-- <tfoot>: 푸터 행들(생략 가능)-->
+            <!-- <tfoot></tfoot> -->
         </table>
 </body>
 </html>
