@@ -16,6 +16,7 @@
 - [2-4. 이미지 태그](#2-4-이미지-태그)
 - [2-5. 폼 태그](#2-5-폼-태그)
 
+[3. HTML 특수 기호]
 
 </details>
 
@@ -287,6 +288,8 @@ HTML(Hyper-Text Markup Language)
 
 <br>
 
+---
+
 - `<input>` 태그
 
     |속성|설명|
@@ -294,8 +297,150 @@ HTML(Hyper-Text Markup Language)
     |checked|type 속성이 "checkbox"나 "radio"인 경우 체크된 상태로 표시|
     |disabled|입력 요소를 비활성화|
     |readonly|입력 영역이 읽기만 가능하도록 지정|
-    |maxlength|`<input>` 요소에 입력할 수 있는 문자열의 최대 길이를 지정|
-    |size|`<input>` 요소의 너비를 지정|
+    |maxlength|`<input>` 태그의 입력할 수 있는 문자열의 최대 길이를 지정|
+    |size|`<input>` 태그의 너비를 지정|
     |autofocus|HTML 문서가 로딩된 후 입력 요소에 자동으로 포커스를 설정|
-    |plaveholder|`<input>` 요소의 안내 문구를 지정|
+    |plaveholder|`<input>` 태그의 안내 문구를 지정|
     |required|반드시 입력해야 하는 입력 요소를 지정|
+    |★type|`<input>` 태그의 타입 지정|
+
+<br>
+
+---
+
+- `<input>` 태그의 `type` 속성 종류
+
+    |속성|설명|
+    |-|-|
+    |hidden|서버로 보내는 값들을 보내는 필드(사용자한텐 안 보임)
+    |text|한 줄짜리 텍스트를 입력할 수 있는 텍스트 상자
+    |search|검색상자(크롬이나 사파리에서만 사용 가능, 다른 곳에선 잘 안돼서 잘 사용하지 않음)
+    |tel|전화번호 입력 필드
+    |url|URL 주소 입력 필드
+    |email|메일주소 입력 필드
+    |password|비밀번호 입력 필드
+    |number|숫자 입력 필드
+    |color|색상 선택 필드
+    |checkbox|체크박스(2개 이상 선택 가능)
+    |radio|라디오 버튼(1개만 선택 가능)
+    |datetime|날짜 선택 선택 필드
+    |datetime-locl|지역 날짜 선택 필드
+    |month, week, date|월,주,일 선택 필드
+    |ragne|범위 선택 필드
+    |time|시각 선택 필드
+
+<br>
+
+---
+
+- `<textarea>` 태그
+    - text 타입과 비슷하지만 text는 한 줄만 가능하고, `<textarea>`태그는 여러 줄의 긴 내용 입력 가능
+
+    |속성|설명|
+    |-|-|
+    |autofocus|페이지가 로드될 때 자동으로 포커스가 `<textarea>` 요소로 이동
+    |cols|텍스트 입력 영역 중 보이는 영역의 너비
+    |rows|텍스트 입력 영역 중 보이는 영역의 라인수
+    |name|`<textarea>` 요소의 이름
+    |disabled|해당 `<textarea>` 요소가 비활성화됨
+    |maxlength|`<textarea>` 요소에서 허용되는 최대 문자수
+    |placeholder|`<textarea>` 요소에 입력될 값에 대한 짧은 힌트 
+    |readonly|`<textarea>` 요소의 텍스트 입력 영역이 읽기 전용임
+    |required|폼 데이터가 서버로 제출되기 전 반드시 채워져 있어야 함
+    |wrap|폼 데이터가 서버로 제출될 때 입력된 텍스트의 줄바꿈 방식
+
+<br>
+
+---
+
+- `<label>` 태그
+
+    - `<input>`태그를 제어해 상태값을 변경하도록 돕는 역할
+    - 예를들면 라디오 버튼 속성을 줬을 때 버튼을 제대로 눌러야 했는데 `<label>` 이용시 `<label>` 안에 있는 글자를 클릭해도 버튼이 클릭된다.
+        ```HTML
+        <form name="selectcode">
+            <!-- 체크박스를 눌러야 체크가 된다 -->
+            <input type="radio" /> HTML
+
+            <!-- 레이블이 있으면 CSS 글자를 클릭해도 버튼이 클릭 됨 -->
+            <label>
+                <input type="radio" /> CSS
+            </label>
+        </form>
+        ```
+
+    - 레이블을 분리 시켜야 하는 경우는 input태그의 아이디를 label의 for에다 적어준다
+        ```HTML
+        <form name="selectcode">
+            <input id="codeItem" type="radio" />
+            <label for="codeItem">HTML<label>
+        </form>
+        ```
+
+<br>
+
+---
+
+- `<select>` 태그
+
+    |태그|설명|
+    |-|-|
+    |`<select>`|선택 양식 생성
+    |`<optgroup>`|선택 항목을 그룹화
+    |`<option>`|선택 항목
+
+    <details>
+    <summary>select 태그 예시</summary>
+
+    ```HTML
+    <form action="#" method="get">
+        <select name="color">
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+        </select>
+    </form>
+    ```
+    </details>
+
+<br>
+
+---
+
+- 입력 양식 묶음
+
+    |태그|설명|
+    |-|-|
+    |`<fieldset>`|입력 양식 묶음
+    |`<legend>`|입력 양식 묶음의 제목
+
+    <details>
+    <summary>입력 양식 묶음 예시</summary>
+
+    ```HTML
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Login</legend>
+
+            Name: <input type="text" name="name"><br>
+            Password: <input type="Password" name="Password"><br>
+            <input type="submit" name="login" value="Login">
+        </fieldset>
+    </form>
+    ```
+    </details>
+
+<br>
+
+> ## 3. HTML 특수 기호
+- HTML 엔티티(entity)
+    - HTML 문서에서 특별한 용도로 사용되는 문자나 키보드로 직접 입력할 수 없는 문자를 표기하는 방법
+
+    |문자|엔티티(Entity)
+    |-|-|
+    |&|`&amp;`
+    |<|`&lt;`
+    |>|`&gt;`
+    ||`&nbsp`
+    |@|`&copy`
+    |§|`&sect;`
