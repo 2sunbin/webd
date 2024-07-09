@@ -239,6 +239,9 @@ HTML(Hyper-Text Markup Language)
 |`<th>`|table header|표의 제목 셀을 표현|
 |`<td>`|table data|표의 본문 셀을 표현|
 
+- colspan 속성: 열(colums) 확장(오른쪽으로 확장하는거야)
+- rowspan 속성: 행(rows) 확장(밑으로 확장하는거야)
+
 ##### 표는 HTML 문서에서 구조가 가장 복잡한 콘텐츠라 반드시 필요한 경우에만 사용
 #### 예제: 02_table.html
 
