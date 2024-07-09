@@ -3,7 +3,7 @@
 <details>
 <summary>목차</summary>
 
-[1. HTML이란 무엇일까요?](#1-html이란-무엇일까요?)
+[1. HTML이란 무엇일까요?](#1-html이란-무엇일까요)
 
 - [1-1. HTML의 기본 구성](#1-1-html의-기본-구성)
 
@@ -75,6 +75,8 @@ HTML(Hyper-Text Markup Language)
 
 - `<body>` 요소: 브라우저 화면(viewport)에 표시되는 요소들의 묶음
 
+<br><br><br>
+---
 
 > ## 2. HTML의 태그
 
