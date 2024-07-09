@@ -92,12 +92,12 @@ HTML(Hyper-Text Markup Language)
 >> ### 2-1. 글자 태그
 - HTML 문서에서 가장 큰 비중을 차지
 
-|종류|태그|
-|-|-|
-|제목|`<h1>~<h6>`|
-|본문|`<p>, <br>, <hr>`|
-|앵커|`<a>`|
-|글자 형태|`<b>, <strong>, <i>, <em>, <small>, <mark>, <sub>, <sup> 등`|
+    |종류|태그|
+    |-|-|
+    |제목|`<h1>~<h6>`|
+    |본문|`<p>, <br>, <hr>`|
+    |앵커|`<a>`|
+    |글자 형태|`<b>, <strong>, <i>, <em>, <small>, <mark>, <sub>, <sup> 등`|
 
 - 제목
     - `<hn>` : 제목(headings)
@@ -161,17 +161,17 @@ HTML(Hyper-Text Markup Language)
 >> ### 2-2. 목록 태그
 - 비슷한 것들끼리 묶어서 사용
 
-|태그|의미|설명|
-|-|-|-|
-|`<ul>`|unordered list|순서가 없는 목록|
-|`<ol>`|ordered list|순서가 있는 목록|
-|`<li>`|list item|목록 요소|
-|`<dl>`|definition list|정의 목록|
-|`<dt>`|definition term|정의 용어|
-|`<dd>`|definition description|정의 설명|
+    |태그|의미|설명|
+    |-|-|-|
+    |`<ul>`|unordered list|순서가 없는 목록|
+    |`<ol>`|ordered list|순서가 있는 목록|
+    |`<li>`|list item|목록 요소|
+    |`<dl>`|definition list|정의 목록|
+    |`<dt>`|definition term|정의 용어|
+    |`<dd>`|definition description|정의 설명|
 
-##### `<ul>`요소나 `<ol>`요소에는 `<li>`요소만 들어갈 수 있음
-##### `<dl>`요소에는 `<dt>`요소와 `<dd>`요소만 들어갈 수 있음
+    ##### `<ul>`요소나 `<ol>`요소에는 `<li>`요소만 들어갈 수 있음
+    ##### `<dl>`요소에는 `<dt>`요소와 `<dd>`요소만 들어갈 수 있음
 
 - `<ul>` : 순서가 없는 목록(unordered list)
     
@@ -267,11 +267,11 @@ HTML(Hyper-Text Markup Language)
 - `<form>` 태그
     - 입력 양식 전체를 감싸는 태그
 
-|속성|설명|
-|-|-|
-|action|전송되는 서버 url 또는 html 링크|
-|method|전송 방식 선택(기본값:get)|
-|name|form의 이름|
+    |속성|설명|
+    |-|-|
+    |action|전송되는 서버 url 또는 html 링크|
+    |method|전송 방식 선택(기본값:get)|
+    |name|form의 이름|
 
 - 입력 데이터 전달 방식(method 속성에 적는 것)
 
@@ -284,3 +284,18 @@ HTML(Hyper-Text Markup Language)
         - 클라이언트에서 데이터를 별도로 인코딩 해서 서버로 전달
         - 전송할 수 있는 데이터 양에 제한이 없음
         - 서버 측에 정보 갱신을 요청할 때 사용(예: 데이터베이스의 갱신)
+
+<br>
+
+- `<input>` 태그
+
+    |속성|설명|
+    |-|-|
+    |checked|type 속성이 "checkbox"나 "radio"인 경우 체크된 상태로 표시|
+    |disabled|입력 요소를 비활성화|
+    |readonly|입력 영역이 읽기만 가능하도록 지정|
+    |maxlength|`<input>` 요소에 입력할 수 있는 문자열의 최대 길이를 지정|
+    |size|`<input>` 요소의 너비를 지정|
+    |autofocus|HTML 문서가 로딩된 후 입력 요소에 자동으로 포커스를 설정|
+    |plaveholder|`<input>` 요소의 안내 문구를 지정|
+    |required|반드시 입력해야 하는 입력 요소를 지정|
