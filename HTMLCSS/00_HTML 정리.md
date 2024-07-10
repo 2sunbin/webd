@@ -42,7 +42,7 @@ HTML(Hyper-Text Markup Language)
 |속성값(value)|속성 값('' 또는 ""로 감쌈)|<h1 color=**"blue"**>Hi</h1<k>>|
 
 <details>
-<summary>HTML 기본 구성 👆</summary>
+<summary>💌 HTML 기본 구성</summary>
 
 ```html
 <!DOCTYPE html>
@@ -61,10 +61,12 @@ HTML(Hyper-Text Markup Language)
         <!-- 여기 적힌 것들이 뷰포트에 나옴 -->
     </body>
 </html>
+```
 
 </details>
 
-```
+<br>
+
 - `<!DOCTYPE html>` : 문서 형식(document type) 선언: 브라우저에게 이 문서가 HTML5 문서임을 알림
 
 - `<html>` 요소: HTML 문서의 최상위 요소
@@ -108,21 +110,37 @@ HTML(Hyper-Text Markup Language)
 
         `<h1> ~ <h6>` 까지 있으며 `<h1>`이 제일 크고 `<h6>`이 제일 작음
         - 페이지에서 특별한 제목이 되는거라 `<h1>`은 가능하면 가장 크고 중요한 한 번만 부분에 걸어주는 게 좋음 (다른 것들은 여러번 나와도 됨)
+
+        <details>
+        <summary>💌 예시</summary>
+
         ```HTML
         <h1>Hello</h1>
         ```
 
+        </details>
+
 - 본문
     - `<p>` : 단락(paragraph)
         블럭 레벨(후에 더 자세한 설명)
+
+        <details>
+        <summary>💌 예시</summary>
+
         ```HTML
         <p>
             Hello World
         </p>
         ```
+
+        </details>
         
 
     - `<br>` : 내부 텍스트의 강제 개행(break)
+
+        <details>
+        <summary>💌 예시</summary>
+
         ```HTML
         <p>
             Hello<br>
@@ -130,17 +148,29 @@ HTML(Hyper-Text Markup Language)
         </p>
         ```
 
+        </details>
+
 
     - `<hr>` : 가로 구분선(horizontal break)
+
+        <details>
+        <summary>💌 예시</summary>
+
         ```HTML
         <hr>
         <h1>Hello</h1>
         ```
+
+        </details>
         
 - 앵커
     - `<a>` : 외부 연결(hyper-link)
     - 서로 다른 HTML 문서 사이를 이동하거나 HTML 문서 내부에서 특정한 위치로 이동할 때 사용
         - href 속성: 외부 연결 URL(원격 참조 URL; hyper-reference) 설정
+
+        <details>
+        <summary>💌 예시</summary>
+
         ```HTML
         <!-- 문서 외부로 이동 -->
         <a href="https://www.naver.com">네이버</a>
@@ -149,6 +179,8 @@ HTML(Hyper-Text Markup Language)
         <a href="#">문서의 상단으로 이동</a>
         <a href="#here">id 속성이 "here"인 요소로 이동</a>
         ```
+
+        </details>
 
 - 글자 형태
     - `<b>` : 의미 없이 내용을 진하게 표시
@@ -178,6 +210,9 @@ HTML(Hyper-Text Markup Language)
     ##### `<dl>`요소에는 `<dt>`요소와 `<dd>`요소만 들어갈 수 있음
 
 - `<ul>` : 순서가 없는 목록(unordered list)
+
+    <details>
+    <summary>💌 예시</summary>
     
     ```HTML
     <ul>
@@ -186,16 +221,26 @@ HTML(Hyper-Text Markup Language)
     </ul>
     ```
 
+    </details>
+
 - `<ol>` : 순서가 있는 목록(ordered list)
     
+    <details>
+    <summary>💌 예시</summary>
+
     ```HTML
     <ol>
         <li>HTML</li>
         <li>CSS</li>
     </ol>
     ```
+    
+    </details>
 
 - 중첩된 목록: 목록 안에 목록이 들어가는 형태
+
+    <details>
+    <summary>💌 예시</summary>
     
     ```HTML
     <ul>
@@ -215,7 +260,12 @@ HTML(Hyper-Text Markup Language)
     </ul>
     ```
 
+    </details>
+
 - `<dl>` : 정의 목록(definition list)
+
+    <details>
+    <summary>💌 예시</summary>
     
     ```HTML
     <!-- 정의 목록 -->
@@ -228,6 +278,9 @@ HTML(Hyper-Text Markup Language)
         <dd>HTML describes the structure of a Web page</dd>
     </dl>
     ```
+
+    </details>
+
 #### 예제: 01_list.html    
 
 <br><hr>
@@ -258,9 +311,14 @@ HTML(Hyper-Text Markup Language)
     - 상대경로: 내 컴퓨터에 저장되어 있는 이미지 경로 삽입
     - 절대경로: 다른 웹 페이지의 이미지 주소를 복사해서 삽입
 
+<details>
+<summary>💌 예시</summary>
+
 ```HTML
 <img src="이미지 경로" alt="이미지가 안 보일 때 대체 텍스트">
 ```
+
+</details>
 
 #### 예제: 03_img.html
 
