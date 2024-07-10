@@ -16,24 +16,22 @@
 - [2-4. 이미지 태그](#2-4-이미지-태그)
 - [2-5. 폼 태그](#2-5-폼-태그)
 
-[3. HTML 특수 기호]
+[3. HTML 특수 기호](#3-html-특수-기호)
 
 </details>
 
-<br>
+<br><br><br><hr><hr>
 
----
----
 
-> ## 1. HTML이란 무엇일까요?
+> # 1. HTML이란 무엇일까요?
 HTML(Hyper-Text Markup Language)
 
 - 웹 브라우저에 표시되도록 설계된 문서의 표준 마크업 언어
     ##### 마크업 언어 : 태그 등을 이용해 문서나 데이터의 구조를 명시하기 위한 규칙을 정리한 언어
 
-<br>
+<br><hr>
 
->> ### 1-1. HTML의 기본 구성
+>> ## 1-1. HTML의 기본 구성
 
 |요소|의미|예시|
 |-|-|-|
@@ -42,6 +40,9 @@ HTML(Hyper-Text Markup Language)
 |요소(element)|태그와 내용을 다 포함한 전체 문자열, HTML문서의 기본 구성 단위|**<h1<k>>Hi</h1<k>>**|
 |속성(attribute)|엘리먼트의 상세한 기능을 시작 태그 안에서 사용|<h1 **color**="blue">Hi</h1<k>>|
 |속성값(value)|속성 값('' 또는 ""로 감쌈)|<h1 color=**"blue"**>Hi</h1<k>>|
+
+<details>
+<summary>HTML 기본 구성 👆</summary>
 
 ```html
 <!DOCTYPE html>
@@ -60,6 +61,9 @@ HTML(Hyper-Text Markup Language)
         <!-- 여기 적힌 것들이 뷰포트에 나옴 -->
     </body>
 </html>
+
+</details>
+
 ```
 - `<!DOCTYPE html>` : 문서 형식(document type) 선언: 브라우저에게 이 문서가 HTML5 문서임을 알림
 
@@ -81,16 +85,15 @@ HTML(Hyper-Text Markup Language)
 
 - `<body>` 요소: 브라우저 화면(viewport)에 표시되는 요소들의 묶음
 
-<br><br><br>
----
+<br><br><br><hr><hr>
 
-> ## 2. HTML의 태그
+> # 2. HTML의 태그
 
 - '<>'로 둘러싸인 문자열로 시작태그(<>)와 종료태그(</>)로 구성
 
-<br>
+<br><hr>
 
->> ### 2-1. 글자 태그
+>> ## 2-1. 글자 태그
 - HTML 문서에서 가장 큰 비중을 차지
 
     |종류|태그|
@@ -157,9 +160,9 @@ HTML(Hyper-Text Markup Language)
     - `<sub>` : 기본 글자보다 아래에 쓰인 텍스트로 지정
     - `<sup>` : 기본 글자보다 위에 쓰인 텍스트로 지정
 
-<br>
+<br><hr>
 
->> ### 2-2. 목록 태그
+>> ## 2-2. 목록 태그
 - 비슷한 것들끼리 묶어서 사용
 
     |태그|의미|설명|
@@ -227,9 +230,9 @@ HTML(Hyper-Text Markup Language)
     ```
 #### 예제: 01_list.html    
 
-<br>
+<br><hr>
 
->> ### 2-3. 표 태그
+>> ## 2-3. 표 태그
 
 |태그|의미|설명|
 |-|-|-|
@@ -247,9 +250,9 @@ HTML(Hyper-Text Markup Language)
 ##### 표는 HTML 문서에서 구조가 가장 복잡한 콘텐츠라 반드시 필요한 경우에만 사용
 #### 예제: 02_table.html
 
-<br>
+<br><hr>
 
->> ### 2-4. 이미지 태그
+>> ## 2-4. 이미지 태그
 - `<img>`: 이미지 삽입
 - 이미지 설정 두 가지 방법
     - 상대경로: 내 컴퓨터에 저장되어 있는 이미지 경로 삽입
@@ -261,9 +264,12 @@ HTML(Hyper-Text Markup Language)
 
 #### 예제: 03_img.html
 
-<br>
+<br><hr>
 
->> ### 2-5. 폼 태그
+>> ## 2-5. 폼 태그
+
+- HTML5 `<form>` 요소
+    - 사용자가 웹사이트에 데이터를 전송 또는 웹 페이지가 입력 데이터를 사용하기 위해 사용
 
 - `<form>` 태그
     - 입력 양식 전체를 감싸는 태그
@@ -286,9 +292,8 @@ HTML(Hyper-Text Markup Language)
         - 전송할 수 있는 데이터 양에 제한이 없음
         - 서버 측에 정보 갱신을 요청할 때 사용(예: 데이터베이스의 갱신)
 
-<br>
+<br><hr>
 
----
 
 - `<input>` 태그
 
@@ -304,9 +309,8 @@ HTML(Hyper-Text Markup Language)
     |required|반드시 입력해야 하는 입력 요소를 지정|
     |★type|`<input>` 태그의 타입 지정|
 
-<br>
+<br><hr>
 
----
 
 - `<input>` 태그의 `type` 속성 종류
 
@@ -329,9 +333,7 @@ HTML(Hyper-Text Markup Language)
     |ragne|범위 선택 필드
     |time|시각 선택 필드
 
-<br>
-
----
+<br><hr>
 
 - `<textarea>` 태그
     - text 타입과 비슷하지만 text는 한 줄만 가능하고, `<textarea>`태그는 여러 줄의 긴 내용 입력 가능
@@ -349,9 +351,7 @@ HTML(Hyper-Text Markup Language)
     |required|폼 데이터가 서버로 제출되기 전 반드시 채워져 있어야 함
     |wrap|폼 데이터가 서버로 제출될 때 입력된 텍스트의 줄바꿈 방식
 
-<br>
-
----
+<br><hr>
 
 - `<label>` 태그
 
@@ -377,9 +377,7 @@ HTML(Hyper-Text Markup Language)
         </form>
         ```
 
-<br>
-
----
+<br><hr>
 
 - `<select>` 태그
 
@@ -403,9 +401,7 @@ HTML(Hyper-Text Markup Language)
     ```
     </details>
 
-<br>
-
----
+<br><hr>
 
 - 입력 양식 묶음
 
@@ -430,7 +426,7 @@ HTML(Hyper-Text Markup Language)
     ```
     </details>
 
-<br>
+<br><br><br><hr><hr>
 
 > ## 3. HTML 특수 기호
 - HTML 엔티티(entity)
