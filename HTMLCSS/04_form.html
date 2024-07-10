@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>form태그</title>
+</head>
+<body>
+    <form action="/server/program" method="post">
+
+        TEXT:
+        <input type="text" name="name" placeholder="이름을 적으세요">
+        
+        <hr`>
+
+        PASSWORD:
+        <input type="password" name="password" placeholder="비밀번호를 입력하세요">
+        
+        <hr>
+
+        RADIO:
+        <input type="radio" name="favorite" value="cocoa">코코아
+        <label><input type="radio" name="favorite" value="coke">콜라</label>
+        <label for="milk">우유</label>
+        <input type="radio" name="favorite" value="milk" id="milk">
+
+        <hr>
+
+        CHECKBOX:
+        <label for="girl">여자</label>
+        <input type="checkbox" name="gender" value="girl" id="girl">
+        <label for="boy">남자</label>
+        <input type="checkbox" name="gender" value="boy" id="boy">
+
+        <hr>
+
+        FILE:
+        <input type="file" name="photo">
+        
+        <hr>
+
+        RESET: <input type="reset" name="reset" value="다지우기">
+
+        <hr>
+
+        SUBMIT:
+        <input type="submit" name="login" value="LOGIN">
+
+        <hr>
+
+        COLOR:
+        <input type="color" name="color">
+        
+        <hr>
+
+        TIME:
+        <input type="time" name="time">
+
+        <hr>
+
+        SELECT:
+        <select name="tour">
+            <option value="korea">한국</option>
+            <option value="japan">일본</option>
+            <option value="swiss">스위스</option>
+        </select>
+
+        <hr>
+
+        <!-- 크기를 마우스로 늘릴 수 있는데 그 때 스타일에 "resize: none;"을 주면 고정된다.-->
+        TEXTAREA:
+        <textarea name="introduce" cols="50" rows="5" placeholder="자기소개를 해보세요"></textarea>
+
+        <hr>
+
+
+
+    </form>
+</body>
+</html>

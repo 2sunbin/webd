@@ -481,7 +481,7 @@ HTML(Hyper-Text Markup Language)
     <input type="타입 속성">
     ```
 
-    <details>
+    </details>
 
 <br><hr>
 
@@ -596,6 +596,8 @@ HTML(Hyper-Text Markup Language)
     </form>
     ```
     </details>
+
+#### 예제: 05_form.html    
 
 <br><hr>
 
