@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 기본 예제1</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>
+        $(function(){
+                setTimeout(function(){
+                    $('#hello').css('color', 'red');
+            }, 2000)
+        });
+    </script>
+</head>
+<body>
+    <!-- 2초가 지나면, <h1> 요소의 글자 색을 빨간색으로 변경 -->
+    <h1 id="hello">Hello World!</h1>
+</body>
+</html>
