@@ -5,7 +5,8 @@
 
 [1. jQuery이란 무엇일까요?](#1-jquery이란-무엇일까요)
 
-[1-1. jQuery 사용 방법](#1-1-jquery-사용-방법)
+- [1-1. jQuery 사용 방법](#1-1-jquery-사용-방법)
+- [1-2. jQuery 기본 코드](#1-2-jquery-기본-코드)
 
 </details>
 
@@ -43,4 +44,25 @@
         // script 작업
     </script>
 </head>
+```
+<br><hr>
+
+>> ## 1-2. jQuery 기본 코드
+- window 객체의 load 이벤트와 비슷한 이벤트로 DOM 트리를 완성한 시점에서 발생하게끔 적음
+
+```javascript
+<script>
+    // 첫 번째 방법
+    jQuery(docuemnt).ready(funtion(){
+        // 코드 작성
+    });
+    // 첫 번째 방법
+    $(document).ready(function(){
+        // 코드 작성
+    });
+    // 세 번째 방법
+    $(function(){
+        // 코드 작성
+    });
+</script>
 ```
