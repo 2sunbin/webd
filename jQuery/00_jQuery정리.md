@@ -66,3 +66,23 @@
     });
 </script>
 ```
+
+>> ## 1-3. jQuery 함수
+
+- jQuery 객체를 포함해서 반환(인자: 객체)
+
+```javascript
+    $(document).height();
+```
+
+- document 객체의 ready 이벤트 핸들러 등록(인자: 함수)
+ 
+ ```javascript
+    $(funtion() {
+        $('body').html('Hi');
+    });
+ ```
+
+
+
+
