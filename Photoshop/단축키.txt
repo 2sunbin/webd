@@ -1,8 +1,0 @@
-선택영역 반전 ctrl shift i 
-색상 반전 ctrl i 
-선택한 레이어 병합 ctrl e 
-눈켜진 레이어 병합 ctrl shift e
-눈켜진 레이어 병합(원본은 살림) ctrl shift alt e
-전경색 넣기 alt delete
-배경색 넣기 ctrl delete
-색 초기화 d
