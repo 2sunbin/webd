@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* reset.css */
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+        v2.0 | 20110126
+        License: none (public domain)
+        */
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* mainMenu */
+        a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+
+        #wrap {
+            margin: 100px auto;
+            width: 200px;
+        }
+
+        #mainMenu {
+            display: flex;
+            
+        }
+        #mainMenu > li {
+            margin: 10px;
+        }
+        #mainMenu > li.passive_mainMenu > a {
+            background-color:rgba(0, 0, 0, 0.2);
+            color:rgba(0, 0, 0, 0.4);
+        }
+        #mainMenu > li > a {
+            font-weight: 900;
+        }
+        #subMenu {
+            padding: 10px;
+
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        #subMenu > ul > li {
+            line-height: 1.3;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>
+        $(function(){
+            const $mainBtn = $('#mainMenu > li');
+            const $subBtn = $('#subMenu > ul');
+
+            $subBtn.eq(1).css('display', 'none');
+
+            $mainBtn.on('click', function(event){
+
+                // a요소의 기본 이벤트 제거
+                event.preventDefault();
+
+                const $index = $(this).index();
+
+                // 선택하지 않은 값에 투명도 주기
+                $(this).removeClass('passive_mainMenu').siblings().addClass('passive_mainMenu');
+
+                // 선택한 값과 같은 인덱스의 서브 메뉴만 보이게 하기
+                $subBtn.eq($index).css('display', 'block').siblings().css('display', 'none');
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="mainMenu">
+            <li><a href="#Front-End">Front-End</a></li>
+            <li class="passive_mainMenu"><a href="#Back-End">Back-End</a></li>
+        </ul>
+        <div id="subMenu">
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ul>
+            <ul>
+                <li>PHP</li>
+                <li>ASP</li>
+                <li>JSP<li>
+                <li>MySQL</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
