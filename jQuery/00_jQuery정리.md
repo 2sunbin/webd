@@ -7,6 +7,7 @@
 
 - [1-1. jQuery 사용 방법](#1-1-jquery-사용-방법)
 - [1-2. jQuery 기본 코드](#1-2-jquery-기본-코드)
+- [1-3. jQuery 함수](#1-3-jquery-함수)
 
 </details>
 
@@ -67,6 +68,8 @@
 </script>
 ```
 
+<br><hr>
+
 >> ## 1-3. jQuery 함수
 
 - jQuery 객체를 포함해서 반환(인자: 객체)
@@ -83,6 +86,74 @@
     });
  ```
 
+- DOM에서 HTML 요소를 탐색 후 HTMLElement 객체를 포함하는 jQuery 객체 생성 후 반환(인자: 선택자 형태의 문자열)
+ 
+ ```javascript
+    $('#test').css('color', 'blue');
+ ```
 
+ - 주어진 HTML 마크업으로 새로운 HTMLElement 객체 생성 후 그 객체를 포함하는 jQuery 객체를 생성해서 반환(인자: HTML 마크업 형태의 문자열)
 
+ ```javascript
+    $('<span>NEW</span>').appendTo('.new');
+ ```
 
+>> ## 1-4. jQuery 선택자
+
+- jQuery 함수로 DOM에서 특정 객체를 탐색하기 위한 방법
+- CSS 선택자를 그대로 사용 가능
+- jQuery 라이브러리에서 추가한 선택자도 있음
+
+```HTML
+    <script>
+        // $기호가 단독으로 쓰이면 jQuery 함수 별칭
+        $('#test').css('color', 'blue');
+
+        // JavaScript 에서는 아래와 같이 쓰임 -->
+        // document.querySelector('#test').style.color = 'blue';
+    </script>
+```
+
+- 태그 선택자
+
+    ```HTML
+        <p>HI</p>
+        <script>
+            $('p').css('color', 'blue');
+        </script>
+    ```
+
+- 아이디 선택자
+
+    ```HTML
+        <p id='hi'>HI</p>
+        <script>
+            $('#hi').css('color', 'blue');
+        </script>
+    ```
+
+- 클래스 선택자
+
+    ```HTML
+        <p class='hi'>HI</p>
+        <p class='hi'>HEllo</p>
+        <script>
+            $('.hi').css('color', 'blue');
+            <!-- jQuery 객체의 메서드들은 jQuery 객체에 담겨 있는 HTMLElement 객체가 몇 개인지에 상관없이 메서드 내부에서 반복문으로 순차적으로 조작(자바스크립트러처럼 for문 필요 없음) -->
+        </script>
+    ```
+
+- 자식 선택자
+
+    ```HTML
+        <ul>
+            <li>Red</li>
+            <li>Blue<span>Gray<span></li>
+        </ul>
+        <script>
+            <!-- 자식 선택자 -->
+            $('ul > li').css('color', 'red');
+            <!-- 후손 선택자 -->
+            $('ul span').css('font-weight', 'bold');
+        </script>
+    ```
