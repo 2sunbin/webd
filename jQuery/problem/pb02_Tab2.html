@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>탭 메뉴 만들기(다른 방법)</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #wrap{
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        #tabButtons {
+            display: flex;
+        }
+
+        #tabButtons > li {
+            width: 50%;
+            line-height: 2;
+            text-align: center;
+            font-weight: bold;
+
+            /* 기본 상태는 비활성화 */
+            background-color: #a6a6a6;
+            color: #818181;
+            border: none;
+            border-bottom: 2px solid gray;
+            cursor: pointer;
+        }
+
+        /* 활성화 시 적용 */
+        #tabButtons > li.on {
+            background-color: transparent;
+            color: inherit;
+            border: 2px solid gray;
+            border-bottom: none;
+            cursor: default;
+        }
+
+        .tabContent {
+            padding: 10px;
+            line-height: 1.5;
+
+            border: 2px solid gray;
+            border-top: none;
+
+            /* 기본 상태는 비활성화(화면에 안 보임) */
+            display: none;
+        }
+
+        /* 활성화 시 적용 */
+        .tabContent.on {
+            display: block;
+        }
+    </style>
+    <script>
+        
+        $(function(){
+            // 프로그램에서 참조하는 요소 미리 탐색
+            const $tabButtons = $('#tabButtons > li');
+            const $tabContent = $('.tabContent');
+            
+            // 1. #tabButtons의 li를 클릭할 때
+            $tabButtons.on('click', function(){
+
+                /**
+                 * filter 메서드: jQuery 객체의 원소들 중에서 주어진 선택자로 걸러냄
+                 * removeClass 메서드: jQuery 객체의 원소들에 주어진 class 속성 제거
+                 * addClass 메서드: jQuery 객체의 원소들에 주어진 class 속성 추가
+                 * siblings 메서드: jQuery 객체의 원소들의 형제 요소들로 jQuery 객체를 생성
+                 * attr 메서드: jQuery 객체의 원소의 HTML 속성(attribute)을 참조
+                 * eq 메서드: jQuery 객체의 원소들 중에서 주어진 인덱스로 원소 선택
+                 * is 메서드: jQuery 객체의 원소가 주어진 선택자로 선택되는지 검사
+                */
+    
+                // 이미 클릭한 요소를 또 클릭하면 아래의 문장이 실행되지 않도록 추가
+                // (굳이 불필요한 코드가 실행되지 않도록)
+                if($(this).is('.on')) return;
+
+                // 2. 클릭한 <li> 요소에 on 클래스 속성을 추가하고,
+                //    그 요소의 형제 요소들에서 on 클래스 속성 제거
+                $(this).addClass('on').siblings().removeClass('on');
+                // addClass는 jQuery 객체의 메서드고
+                // this는 HTMLElement 객체라 this로 적으면 안 되고
+                // ★ $(this)로 제이쿼리 함수를 호출해야 함(jQuery 객체부터 만들기)
+    
+                // 3. tabContent 요소 중에도 on클래스 속성 제거
+                $tabContent.removeClass('on');
+                // 이 때 filter로 .filter('.on')으로 찾을 수 있는데
+                // 굳이 안 찾아도 removeClass같은 애가 내부적으로 있으면 삭제하고
+                // 없으면 그냥 넘어가서 filter를 안 적어도 된다.
+    
+                // 4. tabButtons의 li요소와 관련이 있는 tabContent에 on 클래스 추가
+                // 4-1. data-index 속성 값 참조
+                const index = $(this).attr('data-index');
+    
+                // 선택한 tabButtons의 인덱스 값이 같은 tabContent에 on 클래스 추가
+                $tabContent.eq(index).addClass('on');
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="tabButtons">
+            <li data-index="0" class="on">Front-End</li>
+            <li data-index="1">Back-End</li>
+        </ul>
+
+        <ul class="tabContent on">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>jQuery</li>
+        </ul>
+
+        <ul class="tabContent">
+            <li>PHP</li>
+            <li>ASP</li>
+            <li>JSP<li>
+            <li>MySQL</li>
+        </ul>
+    </div>
+</body>
+</html>

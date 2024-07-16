@@ -8,19 +8,36 @@
         </style>
         <!-- jQuery 라이브러리 연결 -->
         <script src="https://code.jquery.com/jquery.min.js"></script>
+
         <script>
             // jQuery(document).ready 이벤트 핸들러 연결
             $(function () {
-
+                
                 // 3초가 지났을 때 실행
                 window.setTimeout(function () {
+                    
+                    // 방법1. 내가 푼 것----------------------------------------
+                    // // #dream 요소의 인라인 스타일 속성에 transition 스타일 속성을 1초로 지정
+                    // $('#dream').css('transition-duration', '1000ms');
 
-                    // #dream 요소의 인라인 스타일 속성에 transition 스타일 속성을 1초로 지정
-                    $('#dream').css('transition-duration', '1000ms');
+                    // // #dream 요소의 인라인 스타일 속성에 opacity 스타일 속성을 0으로 지정
+                    // // (transition 스타일 속성은 visibility 또는 display 스타일 속성의 변화에는 영향을 주지 않음)
+                    // $('#dream').css('opacity', '0');
 
-                    // #dream 요소의 인라인 스타일 속성에 opacity 스타일 속성을 0으로 지정
-                    // (transition 스타일 속성은 visibility 또는 display 스타일 속성의 변화에는 영향을 주지 않음)
-                    $('#dream').css('opacity', '0');
+                    // 방법2. 메서드 체이닝-------------------------------------
+                    // 
+                    // $('#dream').css('transition-duration', '1s')
+                    //     .css('visibility', 'hidden')
+                    //     .css('opacity', '0');
+                    // -----------------------------------------------------
+
+                    // 방법3. 값을 설정하는 메서드는 인자로 객체를 지정해 여러 값 한 번에 설정 가능
+                    $('#dream').css({
+                        'transition-duration': '1s',
+                        'visibility': 'hidden',
+                        'opacity': '0'
+                    });
+                    // -----------------------------------------------------
 
                 } ,3000);
             });

@@ -8,6 +8,8 @@
 - [1-1. jQuery 사용 방법](#1-1-jquery-사용-방법)
 - [1-2. jQuery 기본 코드](#1-2-jquery-기본-코드)
 - [1-3. jQuery 함수](#1-3-jquery-함수)
+- [1-4. jQuery 선택자](#1-4-jquery-선택자)
+- [1-5. 메서드 체이닝](#1-5-메서드-체이닝)
 
 </details>
 
@@ -20,53 +22,72 @@
 
 >> ## 1-1. jQuery 사용 방법
 - 다운로드(https://jquery.com/) 후 서버에 업로드하고, HTML 문서에 추가
-```HTML
-<head>
-    <!-- 다운 받은 위치의 jquery 집어넣기  -->
-    <script src="jquery-3.7.1.min.js"></script>
-    <script>
-        // script 작업
-    </script>
-</head>
-```
+
+    <details>
+    <summary>💌 jQuery 사용 방법</summary>
+
+    ```HTML
+    <head>
+        <!-- 다운 받은 위치의 jquery 집어넣기  -->
+        <script src="jquery-3.7.1.min.js"></script>
+        <script>
+            // script 작업
+        </script>
+    </head>
+    ```
+
+    </details>
+
+<br>
 
 - CDN 활용
-```HTML
-<head>
-    <!-- 다운 안 해도 CDN 적어 넣으면 사용 가능  -->
-    <!-- 현재 상태는 버전을 따로 설정 안 해줘도 사람들이 많이 사용하는 버전으로 알아서 설정해줌 -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <!-- 
-        특정 버전을 선택해서 적으려면 
-        https://code.jquery.com/jquery-3.7.1.min.js
-        이런식으로 버전을 직접 적어주면 됨
-    -->
-    <script>
-        // script 작업
-    </script>
-</head>
-```
+    <details>
+    <summary>💌 CDN 활용 </summary>
+
+    ```HTML
+    <head>
+        <!-- 다운 안 해도 CDN 적어 넣으면 사용 가능  -->
+        <!-- 현재 상태는 버전을 따로 설정 안 해줘도 사람들이 많이 사용하는 버전으로 알아서 설정해줌 -->
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <!-- 
+            특정 버전을 선택해서 적으려면 
+            https://code.jquery.com/jquery-3.7.1.min.js
+            이런식으로 버전을 직접 적어주면 됨
+        -->
+        <script>
+            // script 작업
+        </script>
+    </head>
+    ```
+
+    </details>
+
 <br><hr>
 
 >> ## 1-2. jQuery 기본 코드
 - window 객체의 load 이벤트와 비슷한 이벤트로 DOM 트리를 완성한 시점에서 발생하게끔 적음
 
-```javascript
-<script>
-    // 첫 번째 방법
-    jQuery(docuemnt).ready(funtion(){
-        // 코드 작성
-    });
-    // 첫 번째 방법
-    $(document).ready(function(){
-        // 코드 작성
-    });
-    // 세 번째 방법. 다 같은 의미라 가장 간단한 세 번째 방법을 많이 쓰긴 함
-    $(function(){
-        // 코드 작성
-    });
-</script>
-```
+    <details>
+    <summary>💌 jQuery 기본 코드</summary>
+
+    ```javascript
+    <script>
+        // 첫 번째 방법
+        jQuery(docuemnt).ready(funtion(){
+            // 코드 작성
+        });
+        // 첫 번째 방법
+        $(document).ready(function(){
+            // 코드 작성
+        });
+        // 세 번째 방법. 다 같은 의미라 가장 간단한 세 번째 방법을 많이 쓰긴 함
+        $(function(){
+            // 코드 작성
+        });
+    </script>
+    ```
+
+    </details>
 
 <br><hr>
 
@@ -74,29 +95,47 @@
 
 - jQuery 객체를 포함해서 반환(인자: 객체)
 
-```javascript
-    $(document).height();
-```
+    <details>
+    <summary>💌 인자: 객체</summary>
+
+    ```javascript
+        $(document).height();
+    ```
+
+    </details>
 
 - document 객체의 ready 이벤트 핸들러 등록(인자: 함수)
- 
- ```javascript
-    $(funtion() {
-        $('body').html('Hi');
-    });
- ```
+
+    <details>
+    <summary>💌 인자: 함수</summary>
+    
+    ```javascript
+        $(funtion() {
+            $('body').html('Hi');
+        });
+    ```
 
 - DOM에서 HTML 요소를 탐색 후 HTMLElement 객체를 포함하는 jQuery 객체 생성 후 반환(인자: 선택자 형태의 문자열)
  
- ```javascript
-    $('#test').css('color', 'blue');
- ```
+    <details>
+    <summary>💌 인자: 선택자 형태의 문자열</summary>
+
+    ```javascript
+        $('#test').css('color', 'blue');
+     ```
+
+     </details>
 
  - 주어진 HTML 마크업으로 새로운 HTMLElement 객체 생성 후 그 객체를 포함하는 jQuery 객체를 생성해서 반환(인자: HTML 마크업 형태의 문자열)
 
- ```javascript
-    $('<span>NEW</span>').appendTo('.new');
- ```
+    <details>
+    <summary>💌 인자: HTML 마크업 형태의 문자열</summary>
+
+    ```javascript
+        $('<span>NEW</span>').appendTo('.new');
+    ```
+
+    </details>
 
 >> ## 1-4. jQuery 선택자
 
@@ -104,17 +143,27 @@
 - CSS 선택자를 그대로 사용 가능
 - jQuery 라이브러리에서 추가한 선택자도 있음
 
-```HTML
-    <script>
-        // $기호가 단독으로 쓰이면 jQuery 함수 별칭
-        $('#test').css('color', 'blue');
+    <details>
+    <summary>💌 jQuery 선택자</summary>
 
-        // JavaScript 에서는 아래와 같이 쓰임 -->
-        // document.querySelector('#test').style.color = 'blue';
-    </script>
-```
+    ```HTML
+        <script>
+            // $기호가 단독으로 쓰이면 jQuery 함수 별칭
+            $('#test').css('color', 'blue');
+
+            // JavaScript 에서는 아래와 같이 쓰임 -->
+            // document.querySelector('#test').style.color = 'blue';
+        </script>
+    ```
+
+    </details>
+
+<br>
 
 - 태그 선택자
+
+    <details>
+    <summary>💌 태그 선택자</summary>
 
     ```HTML
         <p>HI</p>
@@ -123,7 +172,14 @@
         </script>
     ```
 
+    </details>
+
+<br>
+
 - 아이디 선택자
+
+    <details>
+    <summary>💌 아이디 선택자</summary>
 
     ```HTML
         <p id='hi'>HI</p>
@@ -132,7 +188,14 @@
         </script>
     ```
 
+    </details>
+
+<br>
+
 - 클래스 선택자
+
+    <details>
+    <summary>💌 클래스 선택자</summary>
 
     ```HTML
         <p class='hi'>HI</p>
@@ -143,7 +206,14 @@
         </script>
     ```
 
+    </details>
+
+<br>
+
 - 자식 선택자
+
+    <details>
+    <summary>💌 자식 선택자</summary>
 
     ```HTML
         <ul>
@@ -157,3 +227,26 @@
             $('ul span').css('font-weight', 'bold');
         </script>
     ```
+
+    </details>
+
+<br><hr>
+
+>> ## 1-5. 메서드 체이닝
+- JavaScript 프로그램에서 메서드를 계속해서 호출
+- jQuery 객체의 메서드 중 설정하는 메서드는 jQuery 객체 반환
+- 메서드 체이닝 활용시 반복적 DOM 탐색 줄임
+
+    <details>
+    <summary>💌 HTML 기본 구성</summary>
+
+    ```HTML
+    <script>
+        $('.hi').css('color', 'red')
+            .add('.hello').css('font-weight', 'bold');
+    </script>
+    ```
+
+    </details>
+
+    #### 예제: pb01.html(방법2) 
