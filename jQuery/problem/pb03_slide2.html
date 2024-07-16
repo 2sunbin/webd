@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>슬라이드 1단계(다른 방법)</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #imageSlide {
+            /* imageSlide는 li요소의 너비 또는 img요소의 너비와 같아야 함 */
+            width: 960px;
+
+            border: 10px solid hotpink;
+            margin: 100px auto;
+
+            overflow: hidden;
+        }
+        #imageSlide > ul {
+            display: flex;
+
+            /* <li> 요소들이 나열될 수 있도록 너비 설정 */
+            width: 500%; /* 4800px */
+        }
+
+        #imageSlide > ul > li {
+            width: 20%; /* 960px */
+        }
+
+        #imageSlide > ul > li > img {
+            /** inline 스타일 속성은 이미지가 글자처럼 배치가 돼서 
+             *  lineheight속성의 영향을 받기 때문에 아래에 약간 빈 공간이 남아
+             *  block 형식을 준다.
+             */
+            display: block;
+
+            width: 100%; /* 960px */
+            /* 만약에 퍼센트 단위(컨테이닝 블록의 너비)로 주고 싶으면 
+             * 100%를 주게 되면 li요소가 960px인데 960px안에 flex된 요소들이 작게 들어간다
+             * 그럼 일단 <ul>을 이미지 갯수 5개니깐 5배만큼 설정해주고, 
+             * <li>는 <ul>의 20%가 원하는 960px이 된다
+             */
+        }
+    </style>
+    <script>
+
+        $(function(){
+            const $imageSlide = $('#imageSlide > ul');
+            const INTERVAL = 2000;
+
+            let index = 1;
+
+            /** 이미지 갯수 구하기
+             * $imageSlide[0].childElementCount도 가능. 
+             * 유사 배열 객체이기 때문에 ul요소를 나타내는 html element 객체라서
+             * html element 프로퍼티에 접근하는 게 훨씬 빠르긴 함(위에 적은 것)
+             * [0]부부을 get(0)로 적는 것도 가능
+             */
+            const imageSlideLength = $imageSlide.children().length;
+
+            // 1. 일정 시간마다
+            window.setInterval(function(){
+                // 2. <ul> 요소를 #imageSlide 요소의 너비만큼 왼쪽으로 이동
+                // margin-left: -100%, -200%, -300%, -400%, 0, -100%, ...
+                
+                $imageSlide.css('margin-left', index * -100 + '%');
+
+                index++;
+                index %= imageSlideLength;
+
+            }, INTERVAL);
+        })
+    </script>
+</head>
+<body>
+    <div id="imageSlide">
+        <ul>
+            <li><img src="https://i.imgur.com/7Mu8BZg.png" alt="슬라이드1"></li>
+            <li><img src="https://i.imgur.com/kwD72gU.png" alt="슬라이드2"></li>
+            <li><img src="https://i.imgur.com/qOU9yuQ.png" alt="슬라이드3"></li>
+            <li><img src="https://i.imgur.com/YfsvbdE.png" alt="슬라이드4"></li>
+            <li><img src="https://i.imgur.com/3KWpPQv.png" alt="슬라이드5"></li>
+        </ul>
+    </div>
+</body>
+</html>
