@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>가변 폭 레이아웃에 메뉴바 이벤트2(드롭다운)</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        /* -------------------------전체적------------------------ */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ------------------------#header------------------------ */
+        #header {
+            padding: 30px;
+        }
+        #header > h1 {
+            font-size: 35px;
+            font-weight: bolder;
+            text-shadow: 3px 3px 3px rgb(144, 144, 144);
+        }
+
+        /* --------------------------#nav------------------------- */
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: #6b6b6b;
+            margin-bottom: 10px;
+        }
+        #nav > ul {
+            display: flex;
+        }
+        #nav > ul > li > a {
+            color: white;
+            display: block;
+            padding: 20px;
+        }
+        #nav > ul > li > a:hover {
+            background-color: #464646;
+        }
+        /* 서브 메뉴 */
+        #category > li {
+            position: relative;
+        }
+        #category > li > .submenu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 105%;
+            background-color: #6b6b6b;
+        }
+        #category > li > .submenu > li > a {
+            color: white;
+            display: block;
+            padding: 20px;
+        }
+        #category > li > .submenu > li > a:hover {
+            background-color: #464646;
+        }
+
+        #category > li > ul.on {
+            display: block;
+        }
+
+        /* -----------------------#container---------------------- */
+        #container {
+            display: flex;
+        }
+
+        /* ------------------#container > #sidebar---------------- */
+        #sidebar {
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        #sidebar > ul > li > a {
+            display: block;
+            padding: 20px 20px;
+        }
+        #sidebar > ul > li > a:hover {
+            background-color: #c5c5c5;
+        }
+
+        /* ----------------#container > #contents----------------- */
+        #contents{
+            width: calc(100% - 200px);
+            padding: 5px 20px;
+            border-left: 2px solid rgb(183, 183, 183);
+        }
+        #contents > h2 {
+            font-size: 25px;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        #contents > p {
+            font-size: 15px;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        /* ------------------------#footer------------------------ */
+        #footer{
+            background-color: #a6a6a6;
+            padding: 30px;
+            text-align: right;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $menu = $('#category > li > a');
+            const $submenu = $('.submenu');
+
+            $menu.on('click', function(event){
+                event.preventDefault();
+
+                $thisSubmenu =  $(this).siblings();
+
+                // 만약에 on클래스(display:block) 상태이면?
+                if($thisSubmenu.is('.on')){
+                    // on클래스를 제거해줘(재 클릭시 사라지게)
+                    $thisSubmenu.removeClass('on');
+
+                // on클래스 상태가 아니면?
+                }else{
+                    // 일단 서브 메뉴들에 on클래스 되어 있는 거 제거
+                    $submenu.removeClass('on');
+                    // on클래스 부여(클릭시 나오게)
+                    $thisSubmenu.addClass('on');
+                }
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <header id="header">
+        <h1><a href="#fluidlayout">Fluid Layout</a></h1>
+    </header>
+    <!-- // #header -->
+
+    <nav id="nav">
+        <ul id="category">
+            <li><a href="#home">Home</a>
+                <ul class="submenu">
+                    <li><a href="#introduce">Introduce</a></li>
+                    <li><a href="#service">Service</a></li>
+                </ul>
+            </li>
+            <li><a href="#html">HTML</a>
+                <ul class="submenu">
+                    <li><a href="#tutorial">Tutorial</a></li>
+                    <li><a href="#reference">Reference</a></li>
+                    <li><a href="#example">Example</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </li>
+            <li><a href="#css">CSS</a>
+                <ul class="submenu">
+                    <li><a href="#tutorial">Tutorial</a></li>
+                    <li><a href="#reference">Reference</a></li>
+                    <li><a href="#example">Example</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </li>
+            <li><a href="#javascript">JavaScript</a>
+                <ul class="submenu">
+                    <li><a href="#tutorial">Tutorial</a></li>
+                    <li><a href="#reference">Reference</a></li>
+                    <li><a href="#example">Example</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </li>
+            <li><a href="#jquery">jQuery</a>
+                <ul class="submenu">
+                    <li><a href="#tutorial">Tutorial</a></li>
+                    <li><a href="#reference">Reference</a></li>
+                    <li><a href="#example">Example</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li><a href="#login">Login</a></li>
+            <li><a href="#singup">Sign up</a></li>
+        </ul>
+    </nav>
+    <!-- // #nav -->
+
+    <div id="container">
+        <aside id="sidebar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#html">HTML</a></li>
+                <li><a href="#css">CSS</a></li>
+                <li><a href="#javascript">JavaScript</a></li>
+                <li><a href="#jquery">jQuery</a></li>
+            </ul>
+        </aside>
+        <!-- // #sidebar -->
+
+        <main id="contents">
+            <h2>Legends Never Die</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                    They never lose hope when everything's cold and the fighting's near 
+                    It's deep in their bones they run into smoke when the fire is fierce 
+                    'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Legends never die 
+                When the world is calling out your name Begging you to fight Pick 
+                yourself up once more Pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part 
+                of you Every time you bleed for reaching greatness Legends never die
+            </p>
+        </main>
+        <!-- // #contents -->
+
+    </div>
+    <!-- // #container -->
+
+    <footer id="footer">
+        &copy;2014-2016 Fluid Layout JS.
+    </footer>
+    <!-- // #footer -->
+
+</body>
+</html>
