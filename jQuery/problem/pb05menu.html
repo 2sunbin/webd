@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="reset.css">
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <style>
-        /* -------------------------전체적------------------------ */
+        /** -------------------------전체적------------------------ */
         a {
             text-decoration: none;
             color: inherit;
         }
 
-        /* ------------------------#header------------------------ */
+        /** ------------------------#header------------------------ */
         #header {
             padding: 30px;
         }
@@ -22,7 +22,7 @@
             text-shadow: 3px 3px 3px rgb(144, 144, 144);
         }
 
-        /* --------------------------#nav------------------------- */
+        /** --------------------------#nav------------------------- */
         #nav {
             display: flex;
             justify-content: space-between;
@@ -40,12 +40,14 @@
         #nav > ul > li > a:hover {
             background-color: #464646;
         }
-        /* 서브 메뉴 */
+        /** 서브 메뉴 */
         #category > li {
             position: relative;
         }
         #category > li > .submenu {
+            /** 처음에는 보이지 않도록 */
             display: none;
+
             position: absolute;
             left: 0;
             top: 105%;
@@ -64,12 +66,12 @@
             display: block;
         }
 
-        /* -----------------------#container---------------------- */
+        /** -----------------------#container---------------------- */
         #container {
             display: flex;
         }
 
-        /* ------------------#container > #sidebar---------------- */
+        /** ------------------#container > #sidebar---------------- */
         #sidebar {
             width: 200px;
             box-sizing: border-box;
@@ -83,7 +85,7 @@
             background-color: #c5c5c5;
         }
 
-        /* ----------------#container > #contents----------------- */
+        /** ----------------#container > #contents----------------- */
         #contents{
             width: calc(100% - 200px);
             padding: 5px 20px;
@@ -100,7 +102,7 @@
             margin-bottom: 20px;
         }
 
-        /* ------------------------#footer------------------------ */
+        /** ------------------------#footer------------------------ */
         #footer{
             background-color: #a6a6a6;
             padding: 30px;
@@ -113,23 +115,90 @@
             const $submenu = $('.submenu');
 
             $menu.on('click', function(event){
+
+                // 기본 이벤트 제거(a 이벤트 제거)
                 event.preventDefault();
 
-                $thisSubmenu =  $(this).siblings();
+                /** 1. 내가 푼 방법(css에 on클래스를 입력해 놓음) -------------------------------------------------------------
+                // 클릭 이벤트가 발생한 <a> 요소 다음에 나오는 자식 요소 > .submenu 요소
+                // this.nextElementSibling 을 써주면 됨.
+                // $thisSubmenu =  $(this).siblings(); 이건 내가 적은걸로 가능하긴 한데 아래가 좀 더 깔끔
+                // $(this).next(); 도 가능
+                $thisSubmenu = $(this.nextElementSibling);
 
-                // 만약에 on클래스(display:block) 상태이면?
+                // 1. 만약에 클릭한 메뉴의 서브메뉴가 on클래스 상태이면?(display:block)
                 if($thisSubmenu.is('.on')){
-                    // on클래스를 제거해줘(재 클릭시 사라지게)
+                    // on클래스를 제거해줘(재클릭시 사라지게)
                     $thisSubmenu.removeClass('on');
 
-                // on클래스 상태가 아니면?
+                // 만약에 클릭한 메뉴의 서브메뉴가 on클래스 상태가 아니면?(display:none)
                 }else{
                     // 일단 서브 메뉴들에 on클래스 되어 있는 거 제거
                     $submenu.removeClass('on');
-                    // on클래스 부여(클릭시 나오게)
+                    // 클릭한 애에게 on클래스 부여(클릭시 나오게)
                     $thisSubmenu.addClass('on');
                 }
+                */
                 
+
+                /** 2. 다른 방법(on클래스를 css에서 안 줬을 때) hide, show 메서드 사용 ------------------------------------------
+                
+                // hide 메서드: display 스타일 속성을 설정해 HTML 요소가 화면에 보이지 않도록 설정
+                // show 메서드: display 스타일 속성을 설정해 HTML 요소가 화면에 보이도록 설정
+                
+
+                $thisSubmenu = $(this.nextElementSibling);
+
+                // 화면에 표시된 상태라면?
+                if($thisSubmenu.is(':visible')){
+                    // 내가 클릭한 메뉴의 서브 메뉴가 화면에 안 보이게 함
+                    // $thisSubmenu.css('display', 'none');
+                    // $thisSubmenu.css('display', '');
+                    // $thisSubmenu.removeAttr('style');
+                    $thisSubmenu.hide();
+
+                // 화면에 보이지 않는 상태라면?
+                }else{
+                    // 이미 화면에 보이는 서브 메뉴는 화면에 안 보이게 함
+                    $submenu.hide();
+
+                    // 내가 클릭한 메뉴의 서브 메뉴가 화면에 나타나게 함
+                    $thisSubmenu.show();
+                }
+
+                
+                // 3. 다른 방법(on클래스를 css에서 안 줬을 때) toggle 메서드 사용 적어도 3번 방법부터 써야 jQuery를 쓴다고 생각-----------------------
+
+                //toogle 메서드: show인 상태와 hide 상태를 토글(알아서 보이면 보이지 않게, 보이지 않으면 보이게)
+
+                $thisSubmenu = $(this.nextElementSibling);
+                
+                // 화면에 보이지 않은 상태면?
+                // 숨기고
+                if($thisSubmenu.is(':hidden')){
+                    $submenu.hide();
+                }
+                // 그 다음에는 화면에 표시하거나 숨김
+                $thisSubmenu.toggle();
+                */
+
+
+                /** 4. 다른 방법 toggle 메서드 사용 ------------------------------------------ */
+                // $menu.on('click', function(event){
+
+                //     event.preventDefault();
+
+                //     $thisSubmenu = $(this.nextElementSibling);
+
+                //     $submenu.not($thisSubmenu).hide();
+                //     $thisSubmenu.toggle();
+                // });
+
+
+                /** 5. 다른 방법 -------------------------------------------------------------*/
+                $(this).next().toggle().parent()    // <li>요소
+                    .siblings().children('.submenu').hide();
+
             });
         });
     </script>
