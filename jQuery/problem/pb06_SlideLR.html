@@ -16,9 +16,15 @@
             display: flex;
             flex-direction: row-reverse;
 
+            /* li요소 5개가 나란히 배치되게 ul요소 너비 설정 */
             width: 500%;
+
+            margin-left: -400%;
+            /* transform: translateX(-80%); */
+            /* position: relative; left: -400%; */
         }
         #slide > ul >li {
+            /* 컨테이닝 블록인 ul요소 너비의 1/5 */
             width: 20%;
         }
         #slide > ul > li > img {
@@ -31,24 +37,40 @@
         $(function(){
             const $slide = $('#slide > ul');
             const INTERVAL = 2000;
-            let index = 1;
-            $slide.css('margin-left', -400 + '%');
 
-
-            
             window.setInterval(function(){
-                // $slide.css('margin-left', index * -100 + '%');
-                $slide.css('transitionDuration', '1s');
-                $slide.css('transform', 'translateX(' + 20 * index +  '%)');
-                index++;
-                console.log(index)
+                $slide.css({transitionDuration: '400ms', marginLeft: '-300%'});
+                // ul 요소의 움직임이 끝나면 -> transition-duration 스타일 속성에 설정한 시간이 지나고.
+                window.setTimeout(function(){
+                    // ul요소에 설정했던 스타일 속성 제거
+                    // $slide.css({transitionDuration: '', marginLeft: null});
+                    // $slide.removeAttr('style')
 
-                if(index == 6) {
-                    index = 1;
-                    $slide.css('margin-left', -500 + '%');
-                }
-                
+                    // ul요소의 첫 번째 자식 요소를 마지막으로 옮김
+                    // $slide.children(':first').appendTo($slide);
+                    $slide.removeAttr('style').children(':first').appendTo($slide);
+                }, 400);
+
             }, INTERVAL);
+
+
+            // -----------------내가 풀다가 실패한 것----------------
+            // let index = 1;
+            // $slide.css('margin-left', -400 + '%');
+            
+            // window.setInterval(function(){
+            //     // $slide.css('margin-left', index * -100 + '%');
+            //     $slide.css('transitionDuration', '1s');
+            //     $slide.css('transform', 'translateX(' + 20 * index +  '%)');
+            //     index++;
+            //     console.log(index)
+
+            //     if(index == 6) {
+            //         index = 1;
+            //         $slide.css('margin-left', -500 + '%');
+            //     }
+                
+            // }, INTERVAL);
         });
     </script>
 </head>

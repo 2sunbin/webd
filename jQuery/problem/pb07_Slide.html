@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>슬라이드 마우스 오버시 멈춤</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #slide {
+            width: 960px;
+            border: 20px solid orangered;
+            margin: 100px auto;
+            /* overflow: hidden; */
+        }
+        #slide > ul {
+            display: flex;
+            width: 500%;
+        }
+        #slide > ul >li {
+            width: 20%;
+        }
+        #slide > ul > li > img {
+            display: block;
+            width: 100%;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $slide = $('#slide > ul');
+            const INTERVAL = 2000;
+            let index = 1;
+
+            let slider = window.setInterval(function(){
+                $slide.css({transitionDuration: '400ms', marginLeft: '-100%'});
+                
+                window.setTimeout(function(){
+                    $slide.removeAttr('style');
+                    $slide.children(':first').appendTo($slide);
+                }, 400);
+
+            }, INTERVAL);
+
+            $slide.on('mouseenter', function(){
+                clearInterval(slider);
+            });
+
+            $slide.on('mouseleave', function(){
+                
+            });
+
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="slide">
+        <ul>
+            <li><img src="https://i.imgur.com/7Mu8BZg.png" alt="슬라이드1"></li>
+            <li><img src="https://i.imgur.com/kwD72gU.png" alt="슬라이드2"></li>
+            <li><img src="https://i.imgur.com/qOU9yuQ.png" alt="슬라이드3"></li>
+            <li><img src="https://i.imgur.com/YfsvbdE.png" alt="슬라이드4"></li>
+            <li><img src="https://i.imgur.com/3KWpPQv.png" alt="슬라이드5"></li>
+        </ul>
+    </div>
+</body>
+</html>
