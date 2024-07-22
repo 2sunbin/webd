@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>슬라이드</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #slide {
+            margin: 150px auto;
+        }
+        #slide > ul {
+            display: flex;
+            width: 500%;
+            height: 100%;
+        }
+        #slide > ul > li {
+            width: 100%;
+            height: 100%;
+        }
+        #slide > ul > li > img {
+            display: block;
+            width: 100%;
+        }
+    </style>
+    <script>
+        $(function(){
+
+            const $slide = $('#slide > ul');
+            const INTERVAL = 2000;
+            const DURATION = 400;
+            
+            // 나중에 timerID 값으로 해제하기 위해서 구해놓음
+            let timerID = setInterval(slideImage, INTERVAL);
+            
+            // timerID 값을 반환 받기 위해서 익명 함수를 안 씀
+            function slideImage() {
+                $slide.css({transitionDuration: `${DURATION}ms`, marginLeft: '-100%'});
+                
+                window.setTimeout(function(){
+                    // 위에서 준 스타일 속성 제거
+                    $slide.removeAttr('style');
+                    // 첫 번째 자식 요소를 마지막으로 옮김
+                    $slide.children(':first').appendTo($slide);
+                }, DURATION);
+            }
+
+            $slide.on('mouseenter', function(){
+                // 마우스 오버시 슬라이드 작동을 멈추기 위해 타이머 해제
+                window.clearInterval(timerID);
+            });
+            $slide.on('mouseleave', function(){
+                // 마우스 아웃시 슬라이드 재동작을 위해 timerID에 같은 동작의 setInterval 등록
+                timerID = setInterval(slideImage, INTERVAL);
+            });
+            
+        })
+    </script>
+</head>
+<body>
+    <!-- 브라우저 화면 전체를 차지하는 이미지 슬라이드 제작 -->
+    <div id="slide">
+        <ul>
+            <li><img src="https://i.imgur.com/mP2h66E.png" alt="슬라이드1"></li>
+            <li><img src="https://i.imgur.com/6KmJ4YG.png" alt="슬라이드2"></li>
+            <li><img src="https://i.imgur.com/LHbLmZs.png" alt="슬라이드3"></li>
+            <li><img src="https://i.imgur.com/yw9U0QQ.png" alt="슬라이드4"></li>
+            <li><img src="https://i.imgur.com/Ox0NEVM.png" alt="슬라이드5"></li>
+        </ul>
+    </div>
+</body>
+</html>
