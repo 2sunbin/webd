@@ -10,7 +10,7 @@
             width: 960px;
             border: 20px solid orangered;
             margin: 100px auto;
-            /* overflow: hidden; */
+            overflow: hidden;
         }
         #slide > ul {
             display: flex;
@@ -28,24 +28,42 @@
         $(function(){
             const $slide = $('#slide > ul');
             const INTERVAL = 2000;
-            let index = 1;
+            const DURATION = 400; 
 
-            let slider = window.setInterval(function(){
-                $slide.css({transitionDuration: '400ms', marginLeft: '-100%'});
+            // 나중에 타이머를 해제하기 위해 setInterval 메서드가 반환하는 값, 
+            // 즉 타이머 ID를 변수에 대입
+            let timerId = window.setInterval(slideImage, INTERVAL);
+            
+            console.log('현재 timerID: ' + timerId);
+            
+            // 타이머에 의해 실행되는 함수 선언
+            function slideImage(){
+                $slide.css({transitionDuration: `${DURATION}ms`, marginLeft: '-100%'});
                 
                 window.setTimeout(function(){
+                    // 위에서 준 스타일 속성 제거
                     $slide.removeAttr('style');
+                    // 첫 번째 자식 요소를 마지막으로 옮김
                     $slide.children(':first').appendTo($slide);
-                }, 400);
+                }, DURATION);
+            };
 
-            }, INTERVAL);
-
+            // 마우스 포인터가 들어가면 슬라이드가 멈추게
             $slide.on('mouseenter', function(){
-                clearInterval(slider);
+                console.log('멈춤 timerId: ' + timerId);
+
+                // setInterval 메서드로 등록한 타이머 해제
+                // -> 타이머 해제시 타이머 ID 필요
+                // -> 타이머 ID는 setInterval 반환 값
+                window.clearInterval(timerId);
             });
 
+            // 마우스 포인터가 나가면 슬라이드가 재동작하게
             $slide.on('mouseleave', function(){
-                
+                // 다시 움직이게 하기 위해서 setInterval 메서드로 등록했던 타이머와 같은 동작을 하는 타이머를 다시 등록
+                timerId = window.setInterval(slideImage, INTERVAL);
+
+                console.log('재동작 timerId: ' + timerId);
             });
 
             
