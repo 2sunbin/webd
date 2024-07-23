@@ -10,39 +10,88 @@
             font-size: 20px;
             text-align: center;
             margin-top: 30px;
-            cursor: default;
         }
         .tooltip {
             font-size: 25px;
             font-weight: bold;
+            border-bottom: 1px dotted;
+            cursor: help;
+
+            /* .tooltip-box가 .tooltip 요소의 영역을 기준으로 배치되도록 설정 */
+            position: relative;
         }
-        #tool {
-            background-color: rgb(74, 74, 74);
-            color: white;
+        .tooltip-box {
+            /* tooltip 요소 영역 기준 아래로 배치 */
             position: absolute;
-            display: block;
-            padding: 10px;
-            display: none;
+            top: 150%;
+            left: 0;
+
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+
+            color: #eee;
+            font-size: small;
+
+            /* 
+             * 문서의 일반적인 흐름에 벗어난 요소들은 너비를 지정하지 않으면 최소한의 너비를 가짐
+             * 그래서 내부 텍스트에 공백 문자가 있으면 개행하므로 white-space 스타일 속성 설정
+             */
+             white-space: nowrap;
+
+             /* 위치 지정 요소(positioned elements) 중에서 쌓이는 순서 설정 */
+             z-index: 1;
+
+             /* 처음에는 안 보이게 */
+             visibility: hidden;
+             opacity: 0;
+             /* 사라지는 속도 */
+             transition-duration: 200ms;
+        }
+        .tooltip:hover > .tooltip-box {
+            /* display: block; */
+            visibility: visible;
+            opacity: 1;
+
+            /* 마우스 포인터 들어가고 400ms 지난 다음 진행 */
+            transition-duration: 800ms;
+        }
+        /* 가상 요소로 말풍선 위 삼각형 표현 */
+        .tooltip-box::before {
+            content: "";
+
+            /* tooltip-box 요소 영역을 기준으로 위에 배치 */
+            position: absolute;
+            top: -13px;
+            left: 13px;
+
+            /* 테두리를 이용해 삼각형 표현 */
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-bottom-color: rgba(0, 0, 0, 0.95);
         }
     </style>
     <script>
         $(function(){
-            const $tooltip = $('.tooltip');
-            const $tool = $('#tool');
+            $('.tooltip').each(function(){
+                $('<span></span>').addClass('tooltip-box').html(this.title).appendTo(this);
 
-            // 마우스 오버시 툴팁 보이기
-            $tooltip.on('mouseenter', function(evnet){
-                $tool.css({
-                    'display': 'block',
-                    'transform': `translate(${event.clientX}px, ${event.clientY - 100}px)`
-                });
-                $tool.text($(this).attr('title'));
-            });         
-            // 마우스 아웃시 툴팁 사라지기
-            $tooltip.on('mouseleave', function(){
-                $tool.removeAttr('style');
-            }); 
-        });
+                $(this).attr('data-title', this.title).removeAttr('title');
+            })
+
+            // 이 기능을 자바스크립트에서 처리해도 되지만 스타일 시트에서도 간단하게 처리 가능(hover)
+            // $('.tooltip').on({
+            //     mouseenter: function(){
+            //         $(this).children('.tooltip-box').show();
+            //     },
+            //     mouseleave: function(){
+            //         $(this).children('.tooltip-box').show();
+            //     }
+            // })
+            
+        }); 
     </script>
 </head>
 <body>
@@ -50,10 +99,18 @@
         <span title="Hyper-Text Markup Language" class="tooltip" >HTML</span>
         is the language for building web pages.
     </p>
+
+    <!-- ★JavaScript 프로그램으로 아래와 같이 만듦 -->
+    <!-- 이 때 data는 실제로는 title 값을 보이게 활용하지 않아서 없애도 되지만 title 값이 있다는 걸 알려주기 위해 data를 붙여서 냅둠 -->
+    <!-- <p>
+        <span data-title="Hyper-Text Markup Language" class="tooltip" >HTML
+            <span class="tooltip-box">Hyper-Text Markup Language</span>
+        </span>
+        is the language for building web pages.
+    </p> -->
     <p>
         <span title="Cascading Style Sheet" class="tooltip">CSS</span>
         is a language that describes the style of an HTML document.
     </p>
-    <span id="tool"></span>
 </body>
 </html>
