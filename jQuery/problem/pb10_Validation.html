@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 유효성 검사</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #534292;
+        }
+        #login {
+            background-color: #fff;
+            width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            padding-bottom: 0;
+        }
+        #login > h2 {
+            color: #79589f;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            margin: 25px;
+        }
+        #login-form > input[type="text"] {
+            width: 100%;
+            padding: 15px 20px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        #login-form > input[type="password"] {
+            width: 100%;
+            padding: 15px 20px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        #login-form > input[type="submit"] {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            background-color: #79589f;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        #login > #account {
+            background-color: #f5f5f5;
+            color: #777;
+            text-align: center;
+            width: 500px;
+            height: 100px;
+            margin-left: -20px;
+            position: relative;
+        }
+        #login > #account > p {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #account > a {
+            color: #534292;
+        }
+        #forget {
+            display: block;
+            text-align: center;
+            color: white;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $sub = $('input[type=submit]');
+            // 아래처럼 변수에 담아서 $sub 클릭 이벤트에서 쓰려면 공백이 나올까요?
+            // let $idValue = $('input[type=text]').val();
+            // let $pwValue = $('input[type=password]').val();
+
+            $sub.on('click', function(event){
+                if($('input[type=text]').val().length < 4 || $('input[type=text]').val() == ''){
+                    $('input[type=text]').val('');
+                    alert('아이디는 4글자 이상 써라! 공백도 아니된다!');
+                    event.preventDefault();
+
+                }
+                if($('input[type=password]').val().length < 4 || $('input[type=password]').val() == ''){
+                    $('input[type=password]').val('');
+                    alert('비밀번호는 4글자 이상 써라! 공백도 아니된다!');
+                    event.preventDefault();
+                }
+            })
+            
+
+        })
+    </script>
+</head>
+<body>
+    <div id="login">
+        <h2>Log in to your account</h2>
+        <form action="/" method="post" name="login" id="login-form">
+            <input type="text" name="id" placeholder="Your Account" id="id">
+            <!-- minlength = 4 -->
+            <input type="password" name="password" placeholder="Your Password">
+            <input type="submit" value="Log in">
+        </form>
+        <div id="account">
+            <p>
+                <span>Have no account?</span>
+                <a href="#">Sing up!</a>
+            </p>
+        </div>
+    </div>
+    <a href="#" id="forget">Forgot your password?</a>
+</body>
+</html>
