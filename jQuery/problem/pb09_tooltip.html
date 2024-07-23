@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>툴팁</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        p {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 30px;
+            cursor: default;
+        }
+        .tooltip {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        #tool {
+            background-color: rgb(74, 74, 74);
+            color: white;
+            position: absolute;
+            display: block;
+            padding: 10px;
+            display: none;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $tooltip = $('.tooltip');
+            const $tool = $('#tool');
+
+            // 마우스 오버시 툴팁 보이기
+            $tooltip.on('mouseenter', function(evnet){
+                $tool.css({
+                    'display': 'block',
+                    'transform': `translate(${event.clientX}px, ${event.clientY - 100}px)`
+                });
+                $tool.text($(this).attr('title'));
+            });         
+            // 마우스 아웃시 툴팁 사라지기
+            $tooltip.on('mouseleave', function(){
+                $tool.removeAttr('style');
+            }); 
+        });
+    </script>
+</head>
+<body>
+    <p>
+        <span title="Hyper-Text Markup Language" class="tooltip" >HTML</span>
+        is the language for building web pages.
+    </p>
+    <p>
+        <span title="Cascading Style Sheet" class="tooltip">CSS</span>
+        is a language that describes the style of an HTML document.
+    </p>
+    <span id="tool"></span>
+</body>
+</html>
