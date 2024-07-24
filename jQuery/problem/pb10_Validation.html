@@ -24,19 +24,19 @@
             text-align: center;
             margin: 25px;
         }
-        #login-form > input[type="text"] {
+        #login-form > #id {
             width: 100%;
             padding: 15px 20px;
             box-sizing: border-box;
             margin-bottom: 15px;
         }
-        #login-form > input[type="password"] {
+        #login-form > #pw {
             width: 100%;
             padding: 15px 20px;
             box-sizing: border-box;
             margin-bottom: 15px;
         }
-        #login-form > input[type="submit"] {
+        #login-form > #sub {
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
@@ -73,20 +73,19 @@
     </style>
     <script>
         $(function(){
-            const $sub = $('input[type=submit]');
-            // 아래처럼 변수에 담아서 $sub 클릭 이벤트에서 쓰려면 공백이 나올까요?
-            // let $idValue = $('input[type=text]').val();
-            // let $pwValue = $('input[type=password]').val();
+            const $sub = $('#sub');
 
             $sub.on('click', function(event){
-                if($('input[type=text]').val().length < 4 || $('input[type=text]').val() == ''){
-                    $('input[type=text]').val('');
+                const $id = $('#id');
+                const $pw = $('#pw');
+                if($id.val().length < 4 || $id.val() == ''){
+                    $id.val('');
                     alert('아이디는 4글자 이상 써라! 공백도 아니된다!');
                     event.preventDefault();
 
                 }
-                if($('input[type=password]').val().length < 4 || $('input[type=password]').val() == ''){
-                    $('input[type=password]').val('');
+                if($pw.val().length < 4 || $pw.val() == ''){
+                    $pw.val('');
                     alert('비밀번호는 4글자 이상 써라! 공백도 아니된다!');
                     event.preventDefault();
                 }
@@ -102,8 +101,8 @@
         <form action="/" method="post" name="login" id="login-form">
             <input type="text" name="id" placeholder="Your Account" id="id">
             <!-- minlength = 4 -->
-            <input type="password" name="password" placeholder="Your Password">
-            <input type="submit" value="Log in">
+            <input type="password" name="password" placeholder="Your Password" id="pw">
+            <input type="submit" value="Log in" id="sub">
         </form>
         <div id="account">
             <p>
