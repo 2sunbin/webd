@@ -7,40 +7,63 @@
         <script src="https://code.jquery.com/jquery.min.js"></script>
         <style>
             #gallery {
+                /* li 요소를 나란히 배치 */
                 display: flex;
                 gap: 10px;   
                 justify-content: center;
                 margin-top: 100px;
             }
             #gallery > li > a{
+                /* 인라인 블럭이기 때문에 line-height 영향을 받아 아래쪽에 살짝 공간이 남아 블럭으로 만들어주는 게 좋음 아래 img도 마찬가지 */
                 display: block;
             }
             #gallery > li > a > img{
                 display: block;
                 border: 5px solid hotpink;
                 box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6);
+                /* 다른 사람이 다른 크기 이미지를 올릴 수 있으니까 크기를 잡아주는 게 좋아 */
+                width: 200px;
             }
+            /* 오버레이 레이어 */
             #overlay {
+                /* 뷰포트를 기준으로 전체를 차지하도록 배치 */
                 position: fixed;
                 top: 0;
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background-color: rgba(0, 0, 0, 0.3);
+
+                background-color: rgba(0, 0, 0, 0.7);
                 visibility: hidden;
                 opacity: 0;
             }
+            /* overlay 요소 영역 기준으로 가운데 배치 */
             #overlay > img {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 border: 5px solid hotpink;
+
+                /* 이미지의 크기가 항상 같을거라고 장담을 못하기 때문에 최대 크기를 지정해주는 게 좋음 */
                 max-width: 80%;
                 max-height: 80%;
-
-                transition-duration: 500ms;
             }
+
+            /* overlay 요소와 photo 요소가 처음에 보이지 않도록 설정 */
+            #overlay, #photo {
+                /* display:none 은 트랜지션에 영향을 받지 않아 사용x */
+                transition-duration: 400ms;
+                visibility: hidden;
+                opacity: 0;
+            }
+            /* overlay 요소와 photo 요소가 화면에 표시되도록 하는 CSS 클래스 추가(자바스크립트에서 visibility값이랑 opacity 값 변경으로도 괜찮음) */
+            #overlay.on, #photo.on {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            /* 웹 접근성을 향상시키기 위해 추가한 span 요소가 보이지 않도록 설정 */
             #close > span {
             position: absolute;
             display: block;
@@ -51,6 +74,7 @@
             }
 
             #close {
+            /* overlay 기준으로 우상단에 배치 */
             position: absolute;
             top: 50px;
             right: 150px;
@@ -58,20 +82,31 @@
             width: 50px;
             height: 50px;
             
+            /* 배경 이미지로 아이콘 표시(의미가 없는 이미지면 이렇게 백그라운드 이미지로 주는 게 좋음) */
             background-image: url('https://i.imgur.com/BRdH9in.png');
             background-repeat: no-repeat;
             background-size: cover;
+            
+            /* 버튼 요소에 기본적으로 설정되는 스타일 속성 초기화 */
             background-color: transparent;
-
             border: none;
             outline: none;
             padding: 0;
             cursor: pointer;
+
+            /* 여기서 아래 css는 그냥 재미로 넣음 */
+            transition-duration: 400ms;
+            }
+
+            #close:hover {
+                transform: rotate(180deg);
             }
         </style>
         <script>
             $(function(){
                 const $overlay = $('#overlay');
+                // $photo = $overlay.children(:first) 랑도 같음
+                const $photo = $('#photo');
                 const $gallerys = $('#gallery > li > a');
                 const $close = $('#close');
 
@@ -79,37 +114,49 @@
 
                     event.preventDefault();
                     
-                    $overlay.children().attr('src', $(this).attr('href'));
+                    // $photo.attr('src', $(this).attr('href'));
+                    // 위에처럼 제이쿼리로 접근 하지 말고 html element property에 바로 접근 해도 괜찮음
+                    $photo.attr('src', this.href);
 
-                    $overlay.css({
-                        visibility : 'visible',
-                        opacity: 1,
-                        transitionDuration: '1s'
-                    });
-                    $overlay.children().css({
-                        transitionDuration: '3s'
-                    })
+                    // 일단 오버레이를 나타나고 나서
+                    $overlay.addClass('on');
 
-                    
+                    // 포토가 나타나게 한다.(오버레이 시간이 transition-duration을 400을 줘서 400ms 후에 나타나게)
+                    window.setTimeout(function(){
+                        $photo.addClass('on');
+                    }, 400);
                 });
 
                 $close.on('click', function(){
-                    $overlay.css({
-                        visibility : 'hidden',
-                        opacity: 0,
-                        transitionDuration: '3s'
-                    });
-                    $overlay.children().css({
-                        transitionDuration: '1s'
-                    })
+                    $photo.removeClass('on');
+
+                    window.setTimeout(function(){
+                        $overlay.removeClass('on');
+                    }, 400);
                 });
-                
+
+                /**
+                 * 
+                // 만약 버튼 뿐 아니라 오버레이 배경을 클릭했을 때 닫혔으면 하면(그리고 이미지 클릭시엔 안 닫혔으면 하면)
+                $overlay.on('click', function(){
+                    $photo.removeClass('on');
+                    window.setTimeout(function(){
+                        $overlay.removeClass('on');
+                    }, 400);
+                });
+                $photo.on('click', function(event){
+                    // 이벤트 전달 제거(이미지 클릭시 안 닫히게)
+                    event.stopPropagation(); 
+                })
+                    
+                */
+
             });
         </script>
     </head>
     <body>
         <div id="overlay">
-            <img src="https://i.imgur.com/7Mu8BZg.png" alt="메인이미지">
+            <img src="https://i.imgur.com/7Mu8BZg.png" alt="메인이미지" id="photo">
             <button type="button" id="close">
                 <span>Close</span>
             </button>
