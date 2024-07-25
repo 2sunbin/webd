@@ -23,15 +23,35 @@
         $(function(){
             const $box = $('#box');
 
-            // show hide toggle 은 duration을 안 주면 기본값이 아니라 곧바로 사라지거나 나타남
+            // show hide toggle 은 duration을 안 주면 기본값(400ms)이 아니라 곧바로 사라지거나 나타남
             $('#show').on('click', function(){
-                $box.show();
+                // $box.show();
+                // $box.slideDown();
+                $box.fadeIn();
             });
             $('#hide').on('click', function(){
-                $box.hide();
+                // $box.hide();
+                // $box.slideUp(1000);
+                $box.fadeOut();
             });
             $('#toggle').on('click', function(){
-                $box.toggle(500);
+                // $box.toggle(500);
+                // $box.slideToggle(1000);
+                // $box.fadeToggle(1000, 'linear');
+
+                // 1. 일단 페이드 효과가 나타난 다음에
+                $box.fadeToggle(1000, 'linear', function(){
+                    // complete 함수: 지정한 효과가 끝난 다음에 실행할 기능
+                    // -> jQuery 객체의 원소를 대상으로 메서드로 실행됨
+                    //    여기서 쓰는 this는 효과가 적용된 요소(HTMLElement 객체)를 나타냄
+
+                    // 2. 슬라이드 효과가 적용 됨
+                    // $(this)는 $(box)를 뜻함
+                    $(this).slideToggle(1000);
+                    // 계속 콜백 함수 걸 수 있음. 43줄 처럼 function() 써준 거 
+                    // 근데 콜백 함수가 중첩되는 것(일명, 콜백 지옥)을 해결하기 위해
+                    // ES6에서 Promise 가 도입 됐고, 그 다음에 async, await 기능이 도입
+                });
             });
         });
     </script>
