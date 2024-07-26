@@ -5,8 +5,204 @@
     <title>메뉴바 슬라이드</title>
     <link rel="stylesheet" href="reset.css">
     <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        /* --------------------------------공통-------------------------------- */
+        #header, #nav > ul, #contents, #submenu > div {
+            width: 960px;
+            margin: 0 auto;
+        }
+        /* ------------------------------#header------------------------------ */
+        #header > h1 {
+            font-size: 50px;
+            font-weight: bolder;
+            text-align: center;
+            line-height: 3;
+            text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.9);;
+        }
+
+        /* --------------------------------#nav-------------------------------- */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        #nav {
+            border-top: 3px solid rgb(74, 122, 152);
+            border-bottom: 3px solid rgb(74, 122, 152);
+
+            /* submenu 요소가 nav 요소의 영역을 기준으로 배치되도록 */
+            position: relative;
+        }
+        #nav > ul {
+            display: flex;
+        }
+        #nav > ul > li {
+            /* li 요소의 너비를 균등하게 설정 */
+            width: 25%;
+            position: relative;
+        }
+        #nav > ul > li > a {
+            display: block;
+            text-align: center;
+            line-height: 1.5;
+            padding: 25px;
+            font-size: 25px;
+            font-weight: bold;
+
+            /* 가상 요소가 a요소 영역을 기준으로 배치 되도록 */
+            position: relative;
+        }
+        #nav > ul > li > a::after {
+            content: '';
+
+            /* a 요소 영역을 기준으로 아래 가운데 배치 */
+            position: absolute;
+            bottom: 0;
+            /* 아래 50% 를 줬기 때문에 가운데에서부터 늘어남 */
+            left: 50%;
+            transform: translateX(-50%);
+
+            /* width: 80%; */
+            width: 0;
+            height: 5px;
+            background-color: #2b2b7a;
+            transition-duration: 200ms;
+        }
+
+        /* a요소의 영역에 마우스 포인터가 들어가면 가상 요소 표시 */
+        #nav > ul > li > a:hover::after {
+            width: 80%;
+        }
+
+        #submenu {
+            /* nav 요소 영역 기준 아래쪽 */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0; /* right 안 주면 너비 100퍼센트 잡아줘야 함*/
+            background-color: rgba(104, 139, 162, 0.9);
+
+            display: none;
+        }
+
+        #submenu > div {
+            padding: 10px 0;
+
+            /* ul요소가 나란히 배치 */
+            display: flex;
+        }
+        #submenu > div > ul {
+            width: 25%;
+        }
+
+        #submenu > div > ul > li > a {
+            display: block;
+            padding: 10px 80px;
+            
+        }
+
+        #submenu > div > ul > li > a:hover {
+            background-color: rgba(165, 196, 216, 0.9);
+        }
+
+        /* #contents */
+        #contents {
+            padding: 20px 0;
+            
+        }
+        #contents > p {
+            font-size: 20px;
+            font-weight: normal;
+            line-height: 2;
+        }
+        #contents > p:not(:last-child){
+            margin-bottom: 1px;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $submenu = $('#submenu');
+
+            $('#nav > ul > li > a').on('click', function(event){
+                event.preventDefault();
+
+                $submenu.slideDown();
+            });
+            $('#nav').on('mouseleave', function(){
+                $submenu.slideUp();
+            });
+        });
+    </script>
 </head>
 <body>
-    
+    <header id="header">
+        <h1>My Work</h1>
+    </header>
+
+    <nav id="nav">
+        <ul>
+            <li>
+                <a href="#html">HTML</a>
+            </li>
+            <li>
+                <a href="#css">CSS</a>
+            </li>
+            <li>
+                <a href="#javascript">JavaScript</a>
+            </li>
+            <li>
+                <a href="#jquery">jQuery</a>
+            </li>
+            <!-- 하위 메뉴(submenu) -->
+            <!-- 전체 다 감싸고, 배경색 넣어주려고 -->
+            <div id="submenu">
+                <!-- 너비 잡아주려고 쓴 div -->
+                <div>
+                    <ul>
+                        <li><a href="#html-tutorial">Tutorial</a></li>
+                        <li><a href="#html-reference">Reference</a></li>
+                        <li><a href="#html-example">Example</a></li>
+                        <li><a href="#html-faq">FAQ</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#css-tutorial">Tutorial</a></li>
+                        <li><a href="#css-reference">Reference</a></li>
+                        <li><a href="#css-example">Example</a></li>
+                        <li><a href="#css-faq">FAQ</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#javascript-tutorial">Tutorial</a></li>
+                        <li><a href="#javascript-reference">Reference</a></li>
+                        <li><a href="#javascript-example">Example</a></li>
+                        <li><a href="#javascript-faq">FAQ</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#jquery-tutorial">Tutorial</a></li>
+                        <li><a href="#jquery-reference">Reference</a></li>
+                        <li><a href="#jquery-example">Example</a></li>
+                        <li><a href="#jquery-faq">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </ul>
+    </nav>
+
+    <main id="contents">
+        <p>Legends never die when the world is calling you Can you hear them 
+            screaming out your name? Legends never die they become a part of 
+            you Every time you bleed for reaching greatness Relentless you survive
+            They never lose hope when everything's cold and the fighting's near 
+            It's deep in their bones they run into smoke when the fire is fierce 
+            'Oh pick yourself up, cause
+            Legends never die when the world is calling you Can you hear them 
+            screaming out your name? Legends never die they become a part of you
+            Every time you bleed for reaching greatness Legends never die
+            They're written down in eternity But you'll never see the price
+            it costs, the scars collected all their lives When everything's 
+            lost, they pick up their hearts and avenge defeat Before it all 
+            starts, they suffer through harm just to touch a dream 'Oh pick
+            yourself up, cause
+        </p>
+    </main>
 </body>
 </html>
