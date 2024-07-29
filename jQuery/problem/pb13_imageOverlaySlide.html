@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>갤러리 이미지 오버레이</title>
+        <link rel="stylesheet" href="reset.css">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <style>
+            #gallery {
+                display: flex;
+                gap: 10px;   
+                justify-content: center;
+                margin-top: 100px;
+            }
+            #gallery > li > a{
+                display: block;
+            }
+            #gallery > li > a > img{
+                display: block;
+                border: 5px solid hotpink;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6);
+                /* 다른 사람이 다른 크기 이미지를 올리 수 있으니 지정 */
+                width: 200px;
+            }
+            /* 오버레이 레이어 */
+            #overlay {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+            /* overlay 요소 영역 기준으로 가운데 배치 */
+            #overlay > img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: 5px solid hotpink;
+
+                /* 이미지의 크기가 항상 같지 않기 때문에 줌 */
+                max-width: 80%;
+                max-height: 80%;
+            }
+
+            #overlay, #photo {
+                display: none;
+            }
+
+            #overlay > button {
+                /* 버튼 요소에 기본적으로 설정되는 스타일 속성 초기화 */
+                background-color: transparent;
+                border: none;
+                outline: none;
+                padding: 0;
+                cursor: pointer;
+            }
+
+            /* 웹 접근성을 향상시키기 위해 추가한 span 요소가 보이지 않도록 설정 */
+            #overlay > button > span {
+            position: absolute;
+            display: block;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            }
+
+            #close {
+            position: absolute;
+            top: 50px;
+            right: 150px;
+
+            width: 50px;
+            height: 50px;
+            
+            background-image: url('https://i.imgur.com/BRdH9in.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            transition-duration: 400ms;
+            }
+
+            #close:hover {
+                transform: rotate(180deg);
+            }
+
+            #left {
+                position: absolute;
+                top: 50%;
+                left: 100px;
+
+                width: 50px;
+                height: 50px;
+                
+                background-image: url('https://i.imgur.com/DBK27Kx.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            #right {
+                position: absolute;
+                top: 50%;
+                right: 100px;
+
+                width: 50px;
+                height: 50px;
+                
+                background-image: url('https://i.imgur.com/pw4Yfrt.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+        <script>
+            $(function(){
+                const $gallerys = $('#gallery > li > a');
+                const $overlay = $('#overlay');
+                const $photo = $('#photo');
+                const $close = $('#close');
+                const $left = $('#left');
+                const $right = $('#right');
+                let index = 0;
+
+                // 작은 이미지 크게 열기!
+                $gallerys.on('click', function(event){
+
+                    event.preventDefault();
+
+                    $photo.attr('src', this.href);
+
+                    $overlay.fadeIn(function(){
+                        $photo.fadeIn();
+                    });
+
+                    // 내가 선택한 이미지의 인덱스 값을 찾아서 왼쪽 오른쪽 아이콘을 누르면 그 다음 또는 이전 인덱스 값의 이미지 부를거야!
+                    index = $gallerys.index(this);
+                });
+
+                // 크게 열린 이미지 닫는 기능!
+                $close.on('click', function(){
+                    $photo.fadeOut(function(){
+                        $overlay.fadeOut();
+                    });
+                })
+
+                // 크게 열린 이미지 왼쪽 아이콘 누르면 이전 이미지 보이기!(5->4->3->2->1->5->4...)
+                $left.on('click', function(){
+
+                    if(index == 0){
+                        index = 5;
+                    }
+
+                    index--;
+                    $photo.attr('src', $gallerys.eq(index).attr('href'));
+                    index = index;
+                });
+
+                // 크게 열린 이미지 오른쪽 아이콘 누르면 이후 이미지 보이기!(1->2->3->4->5->1->2...)
+                $right.on('click', function(){
+                    
+                    if(index == 4){
+                        index = -1;
+                    }
+
+                    index++;
+                    $photo.attr('src', $gallerys.eq(index).attr('href'));
+                    index = index;                    
+                });
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id="overlay">
+            <button type="button" id="left">
+                <span>left slide</span>
+            </button>
+            <img src="https://i.imgur.com/7Mu8BZg.png" alt="메인이미지" id="photo">
+            <button type="button" id="right">
+                <span>right slide</span>
+            </button>
+            <button type="button" id="close">
+                <span>Close</span>
+            </button>
+        </div>
+        <ul id="gallery">
+            <li>
+                <a href="https://i.imgur.com/7Mu8BZg.png">
+                    <img src="https://i.imgur.com/RDQGlFG.png" alt="이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="https://i.imgur.com/kwD72gU.png">
+                    <img src="https://i.imgur.com/VaVlu0Y.png" alt="이미지2">
+                </a>
+            </li>
+            <li>
+                <a href="https://i.imgur.com/qOU9yuQ.png">
+                    <img src="https://i.imgur.com/AJkIaya.png" alt="이미지3">
+                </a>
+            </li>
+            <li>
+                <a href="https://i.imgur.com/YfsvbdE.png">
+                    <img src="https://i.imgur.com/Y51UhBK.png" alt="이미지4">
+                </a>
+            </li>
+            <li>
+                <a href="https://i.imgur.com/3KWpPQv.png">
+                    <img src="https://i.imgur.com/gbPCnTb.png" alt="이미지5">
+                </a>
+            </li>
+        </ul>
+    </body>
+</html>
