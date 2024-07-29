@@ -153,8 +153,12 @@
                     }
 
                     index--;
-                    $photo.attr('src', $gallerys.eq(index).attr('href'));
-                    index = index;
+                    $photo.fadeOut(function(){
+                        $photo.attr('src', $gallerys.eq(index).attr('href'));
+                        $photo.fadeIn();
+                        index = index;
+                    });
+                    
                 });
 
                 // 크게 열린 이미지 오른쪽 아이콘 누르면 이후 이미지 보이기!(1->2->3->4->5->1->2...)
@@ -165,8 +169,11 @@
                     }
 
                     index++;
-                    $photo.attr('src', $gallerys.eq(index).attr('href'));
-                    index = index;                    
+                    $photo.fadeOut(function(){
+                        $photo.attr('src', $gallerys.eq(index).attr('href'));
+                        $photo.fadeIn();
+                        index = index;
+                    });  
                 });
 
 
