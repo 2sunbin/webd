@@ -102,7 +102,9 @@
             };
 
             // 슬라이드가 마우스 포인터가 들어오거나 나갔을 때 멈춤, 재동작 기능
-            $slide.on({
+            // 이 때 부모한테 하는 이유는 좌 우 버튼을 누를때도 슬라이딩이 동작이 되어 이상해져서
+            // 부모인 div한테 멈춤과 재동작 기능을 주면서 next, prev 버튼을 누를 때도 멈추게끔 만듦
+            $slide.parent().on({
                mouseenter: function(){
                 window.clearInterval(timerID);
                }, 
