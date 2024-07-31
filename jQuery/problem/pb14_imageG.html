@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>마우스 오버시 크기 살짝 커지기</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #panel {
+            display: flex;
+            margin: 300px;
+        }
+        #panel > li {
+            width: 200px;
+
+            /* 슬라이딩 패널의 움직임을 부드럽게 하기 위해 여백을 padding으로 설정 */
+            padding: 0 5px;
+
+            transition-duration: 200ms;
+        }
+        /* 마우스 포인터가 올라간 li요소에 적용할 스타일 */
+        #panel > li.large {
+            width: 300px;
+            margin-top: -35px;
+        }
+        /* 마우스 포인터가 올라간 li요소 제외 다른 형제 요소들에 적용할 스타일 */
+        #panel > li.small {
+            width: 175px;
+        }
+        #panel > li > img{
+            display: block;
+            width: 100%;
+            border: 4px solid hotpink;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6);
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $panelItem = $('#panel > li');
+
+            $panelItem.on({
+               mouseenter: function(){
+                $(this).addClass('large').siblings().addClass('small');
+               }, 
+               mouseleave: function(){
+                $panelItem.removeAttr('class');
+               }
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul id="panel">
+        <li><img src="https://i.imgur.com/7Mu8BZg.png" alt="photo"></li>
+        <li><img src="https://i.imgur.com/kwD72gU.png" alt="photo"></li>
+        <li><img src="https://i.imgur.com/qOU9yuQ.png" alt="photo"></li>
+        <li><img src="https://i.imgur.com/YfsvbdE.png" alt="photo"></li>
+        <li><img src="https://i.imgur.com/3KWpPQv.png" alt="photo"></li>
+    </ul>
+</body>
+</html>
