@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>아코디언</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #accordian {
+            width: 500px;
+            margin: 50px auto;
+        }
+        #accordian > section:not(:last-child){
+            margin-bottom: 10px;
+        }
+        #accordian > section > h2, #accordian > section > p {
+            padding: 10px 15px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+        #accordian > section > h2 {
+            background-color: #feffd5;
+            cursor: pointer;
+        }
+        #accordian > section > p {
+            border-top: none;
+
+            /* 아코디언 기능에서 본문은 무조건 하나만 보여야 함 */
+            display: none;
+        }
+        /* 뷰포트에 처음에는 본문에 하나 열려 있어야 하는데 그 때의 스타일  */
+        #accordian > section.on > h2 {
+            background-color: #ffff75;
+            cursor: default;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $accordianSections = $('#accordian > section');
+
+            // 뷰포트에 p요소가 표시되는 section 요소에 on클래서 설정
+            $accordianSections.eq(0).addClass('on').children('p').show();
+
+            
+            // h2 요소를 클릭
+            $accordianSections.children('h2').on('click', function(){
+
+                // 클릭한 section에 on클래스 속성이 설정되어 있으면 이미 펼쳐진 섹션이므로 이벤트 핸들러 종료
+                if($(this).parent().is('.on')){
+                    return;
+                }
+
+                // 뷰포트에 표시되어 있는 p요소를 화면에 숨김
+                $accordianSections.filter('.on').removeClass('on').children('p').slideUp();
+
+                // 클릭한 h2요소의 p요소가 화면에 나오게 함
+                $(this).next().slideDown().parent().addClass('on');
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <!-- 제목을 클릭하면 본문이 내려오며 나타나거나 올라가며 사라짐 
+         본문은 꼭 하나만 보여야 함(아코디언이라 함) 
+    -->
+     <div id="accordian">
+        <section class="on">
+            <h2>Legends never die</h2>
+                <p>
+                    Legends never die when the world is calling you Can you hear them 
+                    screaming out your name? Legends never die they become a part of 
+                    you Every time you bleed for reaching greatness Relentless you survive
+                    They never lose hope when everything's cold and the fighting's near 
+                    It's deep in their bones they run into smoke when the fire is fierce 
+                    'Oh pick yourself up, cause
+                </p>
+        </section>
+        <section>
+            <h2>calling you Can you hear</h2>
+                <p>
+                    Legends never die when the world is calling you Can you hear them 
+                    screaming out your name? Legends never die they become a part of you
+                    Every time you bleed for reaching greatness Legends never die
+                    They're written down in eternity But you'll never see the price
+                    it costs, the scars collected all their lives When everything's 
+                    lost, they pick up their hearts and avenge defeat Before it all 
+                </p>
+        </section>
+        <section>
+            <h2>you Every time you bleed</h2>
+                <p>
+                    Legends never die when the world is calling you Can you hear them
+                    screaming out your name? Legends never die they become a part of 
+                    you Every time you bleed for reaching greatness Legends never die 
+                    When the world is calling out your name Begging you to fight Pick 
+                    yourself up once more Pick yourself up, cause
+                </p>
+        </section>
+        <section>
+            <h2>reaching greatness</h2>
+                <p>
+                    Legends never die when the world is calling you Can you hear them
+                    screaming out your name? Legends never die they become a part 
+                    of you Every time you bleed for reaching greatness Legends never die
+                </p>
+        </section>
+     </div>
+</body>
+</html>
