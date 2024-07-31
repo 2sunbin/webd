@@ -16,7 +16,7 @@
         }
         #slide > ul {
             display: flex;
-            width: 600%;
+            width: 500%;
         }
         #slide > ul >li {
             width: 20%;
@@ -29,12 +29,13 @@
         /* 이전, 다음 슬라이드로 움직이는 버튼 */
         #prev {
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
-            transform: translateY(-50%);
+            bottom: 0;
 
-            width: 50px;
-            height: 50px;
+            width: 30%;
+
+            opacity: 0.7;
             
             background-image: url('https://i.imgur.com/DBK27Kx.png');
             background-repeat: no-repeat;
@@ -43,12 +44,13 @@
         }
         #next {
             position: absolute;
-            top: 50%;
+            top: 0;
+            bottom: 0;
             right: 0;
-            transform: translateY(-50%);
 
-            width: 50px;
-            height: 50px;
+            width: 30%;
+
+            opacity: 0.7;
             
             background-image: url('https://i.imgur.com/pw4Yfrt.png');
             background-repeat: no-repeat;
@@ -87,18 +89,12 @@
 
 
             // 슬라이드가 넘어가는 기능
-            $slide.children(':first').clone().appendTo($slide);
             function slideImage(){
-                now++;
-                $slide.animate({marginLeft: now * -100 +'%'});
-                
 
-                if(now == 5){
-                    setTimeout(function(){
-                        $slide.animate({marginLeft: 0}, 0);
-                        now = 0;
-                    });
-                }
+                $slide.animate({marginLeft: '-100%'}, function(){
+                    $slide.removeAttr('style');
+                    $slide.children(':first').appendTo(this);
+                });
             };
 
             // 슬라이드가 마우스 포인터가 들어오거나 나갔을 때 멈춤, 재동작 기능
@@ -114,23 +110,19 @@
             });
 
             // 슬라이드가 이전 이미지나 다음 이미지로 넘어가는 기능 
+            // 이전 이미지인 마지막 자식 ul 요소를 첫 번째 자식 요소로 옮김
             $prev.on('click', function(){
-                now--;
-
-                if(now < 0){
-                    now = 4;
-                }
-                $slide.animate({marginLeft: now * -100 +'%'});
+                // $slide.children(':last').prependTo($slide);
+                // 위에랑 같은 의미가 아래와 같음. 메소드 체이닝 가능. 위에 문장과는 pretendTo를 할 때 $slide가 주체인 객체가 아니라서 메소드 체이닝 불가능
+                $slide.prepend($slide.children(':last'));
+                $slide.css('margin-left', '-100%');
+                $slide.animate({marginLeft: 0});
+                // $slide.prepend($slide.children(':last')).css('margin-left', '-100%').animate({marginLeft: 0});
+                // 이렇게 메소드 체이닝 가능
             });
 
-            $next.on('click', function(){
-                now++;
-
-                if(now == 5){
-                    now = 1;
-                }
-                $slide.animate({marginLeft: now * -100 +'%'});
-            });
+            // next 버튼을 누른다는 건 슬라이드가 동작하던 것과 같은 방향으로 이동하는거라 slideImage 함수를 입력해주면 됨
+            $next.on('click', slideImage);
         });
     </script>
 </head>
