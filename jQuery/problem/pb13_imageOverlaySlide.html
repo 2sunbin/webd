@@ -148,33 +148,54 @@
                 // 크게 열린 이미지 왼쪽 아이콘 누르면 이전 이미지 보이기!(5->4->3->2->1->5->4...)
                 $left.on('click', function(){
 
-                    if(index == 0){
-                        index = 5;
+                    // 이전 이미지에 해당하는 인덱스로 설정
+                    index--;
+
+                    // 첫 번째 이미지의 이전 이미지는 마지막 이미지로 설정
+                    if(index < 0 ) {
+                        index = $gallerys.length - 1;
                     }
 
-                    index--;
-                    $photo.fadeOut(function(){
-                        $photo.attr('src', $gallerys.eq(index).attr('href'));
-                        $photo.fadeIn();
-                        index = index;
-                    });
+                    // ● 여기랑 185번째 줄이랑 완전히 똑같은 스크립트로 사용되니까 따로 함수로 빼낸 다음에 적는 것도 괜찮다.
+                    // $photo.fadeOut(function(){
+                    //     $photo.attr('src', $gallerys.eq(index).attr('href'));
+                    //     $photo.fadeIn();
+                    // });
                     
+                    chageImage();
                 });
 
                 // 크게 열린 이미지 오른쪽 아이콘 누르면 이후 이미지 보이기!(1->2->3->4->5->1->2...)
                 $right.on('click', function(){
                     
-                    if(index == 4){
-                        index = -1;
-                    }
-
+                    // 다음 이미지에 해당하는 인덱스로 설정
                     index++;
+
+                    // 마지막 이미지의 다음 이미지는 첫 번째 이미지로 설정
+                    // if(index == 5){
+                    //     index = 0;
+                    // }
+                    // 또는 
+                    // if(index == $gallerys.length) {
+                    //     index = 0;
+                    // }
+                    index %= $gallerys.length;
+                    
+                    // ● 여기
+                    // $photo.fadeOut(function(){
+                    //     $photo.attr('src', $gallerys.eq(index).attr('href'));
+                    //     $photo.fadeIn();
+                    // });  
+
+                    chageImage();
+                });
+
+                function chageImage(){
                     $photo.fadeOut(function(){
                         $photo.attr('src', $gallerys.eq(index).attr('href'));
                         $photo.fadeIn();
-                        index = index;
                     });  
-                });
+                }
 
 
             });
