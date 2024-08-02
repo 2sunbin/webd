@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 슬라이드 인디게이터</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        
+        #slideWrap {
+            width: 960px;
+            border: 20px solid orangered;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ---------------------- #slide ----------------------*/
+        #slide {
+            display: flex;
+            width: 500%;
+        }
+        #slide >li {
+            width: 20%;
+        }
+        #slide > li > img {
+            display: block;
+            width: 100%;
+        }
+
+        /* ---------------------- #indicator ----------------------*/
+        #indicator {
+            position: absolute;
+
+            top: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 버튼 요소에 기본적으로 설정되는 스타일 속성 */
+        #indicator > li > button {
+            width: 30px;
+            height: 30px;
+            border: 8px solid rgb(180, 85, 85);
+            background-color: transparent;
+            border-radius: 50%;
+            outline: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        /* 현재 슬라이드와 같은 번호 인디게이터 */
+        #indicator > li.on > button {
+            background-color: rgb(180, 85, 85);
+        }
+
+        /* 웹 접근성을 향상시키기 위해 추가한 span 요소가 보이지 않도록 설정 */
+        #indicator > li > button > span {
+            position: absolute;
+            display: block;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+
+    </style>
+    <script>
+        $(function(){
+            // 필요한 요쇼 미리 탐색
+            const $slideWrap = $('#slideWrap');
+            const $slide = $('#slide');
+            const $indicator = $('#indicator > li ');
+            const INTERVAL = 2000;
+            let index = 0;
+            
+            let timerID = window.setInterval(slideImage, INTERVAL);
+
+            // 슬라이드에 data-index 추가(인디게이터 클릭할 때 뭐가 보여져야 하는지 알려줄라고)
+            $('#slide > li').each(function(index){
+                $(this).attr('data-index', index);
+            });
+
+            // 인디게이터에 data-index 추가(슬라이드와 같은 data-index인 걸 보여주려고)
+            $('#indicator > li').each(function(index){
+                $(this).attr('data-index', index);
+            });
+
+            // 슬라이드가 넘어가는 기능
+            function slideImage(){
+
+                $slide.animate({marginLeft: '-100%'}, function(){
+                    $slide.removeAttr('style');
+                    $slide.children(':first').appendTo(this);
+
+                    
+                });
+                index = $slide.index(this);
+                    console.log(index);
+            };
+
+            // 슬라이드 오버시 멈춤과 재동작 기능
+            $slideWrap.on({
+               mouseenter: function(){
+                window.clearInterval(timerID);
+               }, 
+               mouseleave: function(){
+                timerID = window.setInterval(slideImage, INTERVAL);
+               }
+            });
+
+            // 인디게이터 클릭시 그 슬라이드 번호 나오는 기능
+            $indicator.on('click', function(){
+
+                // 이미 on이 있는 걸 클릭했을 때 이벤트 핸들러 종료
+                if($(this).is('.on')) return;
+
+                // 내가 선택한 인디게이터에 on클래스를 주고 그 외의 형제 요소들에게 있는 on클래스 제거
+                $(this).addClass('on').siblings().removeClass('on');
+
+                // 클릭한 인디게이터의 data-index와 같은 data-index 값인 슬라이드가 슈루룩 보여지게 하고 싶어
+                // 어떻게 보여줘야 할까~?
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="slideWrap">
+        <ul id="slide">
+            <li><img src="https://i.imgur.com/7Mu8BZg.png" alt="슬라이드1"></li>
+            <li><img src="https://i.imgur.com/kwD72gU.png" alt="슬라이드2"></li>
+            <li><img src="https://i.imgur.com/qOU9yuQ.png" alt="슬라이드3"></li>
+            <li><img src="https://i.imgur.com/YfsvbdE.png" alt="슬라이드4"></li>
+            <li><img src="https://i.imgur.com/3KWpPQv.png" alt="슬라이드5"></li>
+        </ul>
+        <ul id="indicator">
+            <li class="on"><button type="button"><span>1</span></button></li>
+            <li><button type="button"><span>2</span></button></li>
+            <li><button type="button"><span>3</span></button></li>
+            <li><button type="button"><span>4</span></button></li>
+            <li><button type="button"><span>5</span></button></li>
+        </ul>
+    </div>
+</body>
+</html>
