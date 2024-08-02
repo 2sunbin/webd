@@ -5,6 +5,70 @@
     <title>Document</title>
     <link rel="stylesheet" href="reset.css">
     <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #imageSlide {
+            width: 960px;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+
+        #imageSlide > ul {
+            display: flex;
+            /* 100퍼센트 영역에 3장을 표시 하고 싶은데 x퍼센트 영역에 5장 표시 하려면 100 : 3 = x : 5 일 때 x는 166.6666666... */
+            /* 100:3 = x:5 는 166.6666인데 최소 소수점 두 번째 자리까진 적어줘야 좋음(1퍼센트도 소중행) */
+            /* width: 166.67%; 으로 적으면 되는데 좀 더 편하게 계산 하기 위해서 calc 함수 사용. 단위도 제대로 적어주기*/
+            width: calc(500% / 3);
+        }
+        #imageSlide > ul > li {
+            width: 20%;
+            padding: 10px;
+            /* 너비를 줬는데 패딩을 주면 박스 사이징 줘야해 */
+            box-sizing: border-box;
+        }
+        #imageSlide > ul > li > img {
+            display: block;
+            width: 100%;
+            border: 5px solid orange;
+            /* 테두리도 줬으니까 박스 사이징 줘야해 */
+            box-sizing: border-box;
+        }
+
+        /* 두둥 효과 */
+        #imageSlide:hover > ul > li > img {
+            animation-name: dudung;
+            animation-duration: 300ms;
+        }
+
+        @keyframes dudung {
+            from {transform: scale(1);}
+            50%  {transform: scale(1.03);}
+            to   {transform: scale(1);}
+        }
+    </style>
+    <script>
+        $(function(){
+            const INTERVAL = 2000;
+
+            const $imageList = $('#imageSlide > ul');
+
+            $imageList.parent().on({
+                mouseenter: function() {
+                    window.clearInterval(timerId);
+                },
+                mouseleave: function() {
+                    timerId = window.setInterval(slideImage, INTERVAL);
+                }
+            });
+
+            let timerId = window.setInterval(slideImage, INTERVAL);
+
+            function slideImage() {
+                $imageList.animate({marginLeft: '-33.33%'}, function(){
+                    $imageList.removeAttr('style').children(':first').appendTo(this);
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <div id="imageSlide">
