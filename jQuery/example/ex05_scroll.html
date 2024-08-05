@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        #container > h2 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+        #top {
+            /* 뷰포트를 기준으로 오른쪽 아래 배치 */
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.9);
+            
+            color: white;
+            font-weight: bold;
+            text-align: c;
+        }
+    </style>
+    <script>
+        $(function(){
+            const $container = $('#container');
+
+            // #container 요소에 h2요소 20개 추가
+            for(let  i = 1; i <= 20; i++){
+                $('<h2></h2>').html(`DUMMY #${i}`).appendTo($container);
+            }
+
+            const $html = $('html');
+            const $window = $(window);
+            const $document = $(document);
+
+            // HTML 문서의 높이, 뷰포트의 높이, 스크롤 높이
+            console.log('document height = ' + $document.height());
+            console.log('window height = ' + $window.height());
+            console.log('scrollTop = ' + $window.scrollTop());
+
+            // #top 요소의 click 이벤트 핸들러
+            $('#top').on('click', function(event){
+                // 기본 이벤트 제거
+                event.preventDefault();
+
+                // 스크롤 높이 확인
+                console.log('scrollTop = ' + $window.scrollTop());
+
+                // <브라우저 화면을 Y축상의 특정 위치로 스크롤. 한 번에 확 올라가는거야>
+                // 방법 1
+                // $window.scrollTop(0);
+
+                // 방법 2. window 객체의 scrollTo 메서드
+                // window.scrollTo(x축, y축); 57번째랑 같은 역할
+                // window.scrollTo({left:0 , top: 100});
+                // == $window.scrollTop(100);
+
+                // <animate 메서드로 부드러운 화면 스크롤 효과를 구현>
+                // animatino 큐는 html요소를 대상으로 작동하기 때문에 아래 코드는 오류가 남
+                // $window.animate({scrollTop:0});            -> ERROR!!
+
+                // 방법 1
+                // 71번째 줄도 되는지 제대로 적고 검사 해봐야해(검사 되면 둘 다 된다고 설명 적어놓자)
+                // $('html, body').animate({scrollTop:0});
+                // $html.animate({scrollTop:0});
+
+                // 방법2
+                // scrollTo메서드에서 behavior smooth를 주면 65번째 줄이랑 같게 부드럽게 슈루룩 올라감
+                window.scrollTo({left:0, top: 100, behavior: 'smooth'});
+            });
+
+            // window 객체에 wheel 이벤트 핸들러 연결
+            window.addEventListener('wheel', function(event){
+                // 기본 이벤트 제거: 마우스 휠 돌릴 때 스크롤이 위 아래로 되는 거
+                event.preventDefault();
+
+                console.log('event.deltaY? = ' + event.deltaY);
+
+                // 이벤트 객체의 deltaY 속성이 음수인지 양수인지 확인해서
+                // 휠 버튼을 위쪽으로 굴렸는지(음수), 아래쪽으로 굴렸는지(양수) 확인
+                if(event.deltaY < 0){
+                    console.log(`WHEEL: wheeled up!   (deltaY = ${event.deltaY})`);
+                }else if(event.deltaY > 0){
+                    console.log(`WHEEL: wheeled down!'   (deltaY = ${event.deltaY})`);
+                }
+                // 아래처럼까지 줘야 기본 이벤트가 제거 됨. 그냥 event.preventDefault()로 지워지지 않음
+            }, {passive: false});
+        });
+    </script>
+</head>
+<body>
+    <div id="container"></div>
+    <a href="#" id="top">Top</a>
+</body>
+</html>
