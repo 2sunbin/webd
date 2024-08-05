@@ -24,7 +24,9 @@
             
             color: white;
             font-weight: bold;
-            text-align: c;
+            text-align: center;
+            line-height: 70px;
+            text-decoration: none;
         }
     </style>
     <script>
@@ -67,13 +69,13 @@
                 // $window.animate({scrollTop:0});            -> ERROR!!
 
                 // 방법 1
-                // 71번째 줄도 되는지 제대로 적고 검사 해봐야해(검사 되면 둘 다 된다고 설명 적어놓자)
+                // 아래 두 개 다 스무스하게 올라가는거야
                 // $('html, body').animate({scrollTop:0});
                 // $html.animate({scrollTop:0});
 
                 // 방법2
                 // scrollTo메서드에서 behavior smooth를 주면 65번째 줄이랑 같게 부드럽게 슈루룩 올라감
-                window.scrollTo({left:0, top: 100, behavior: 'smooth'});
+                window.scrollTo({left:0, top: 0, behavior: 'smooth'});
             });
 
             // window 객체에 wheel 이벤트 핸들러 연결
@@ -81,7 +83,7 @@
                 // 기본 이벤트 제거: 마우스 휠 돌릴 때 스크롤이 위 아래로 되는 거
                 event.preventDefault();
 
-                console.log('event.deltaY? = ' + event.deltaY);
+                // console.log('event.deltaY? = ' + event.deltaY);
 
                 // 이벤트 객체의 deltaY 속성이 음수인지 양수인지 확인해서
                 // 휠 버튼을 위쪽으로 굴렸는지(음수), 아래쪽으로 굴렸는지(양수) 확인
@@ -90,7 +92,7 @@
                 }else if(event.deltaY > 0){
                     console.log(`WHEEL: wheeled down!'   (deltaY = ${event.deltaY})`);
                 }
-                // 아래처럼까지 줘야 기본 이벤트가 제거 됨. 그냥 event.preventDefault()로 지워지지 않음
+                // addEventListener에 아래처럼까지 줘야 기본 이벤트가 제거 됨. 그냥 event.preventDefault()로 지워지지 않음
             }, {passive: false});
         });
     </script>
