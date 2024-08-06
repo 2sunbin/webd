@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>스크롤 인디케이터</title>
+    <link rel="stylesheet" href="reset.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <style>
+        /* ---------------------전체적인 스타일--------------------- */
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* -------------------------header------------------------- */
+        #header > h1 {
+            font-size: 50px;
+            font-weight: 900;
+            padding: 30px 40px;
+        }
+
+        /* ---------------------------nav--------------------------- */
+        #nav {
+            background-color: #3a3a3a;
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.7);
+        }
+        #nav > ul {
+            display: flex;
+        }
+        #nav > ul > li > a {
+            padding: 20px 40px;
+            color: white;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+        }
+        #nav > ul > li > a:hover {
+            background-color: #000000;
+        }
+        /* nav에 scroll 클래스가 붙었을 때 스타일 */
+        #nav.fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* right:0; left:0; 을 주는 것도 width:100%와 같은 역할 함 */
+        }
+
+        /* #nav 요소가 화면 상단에 고정되면 #main 요소의 상단에 여백 추가 
+
+            #nav.fixed + #main {
+                margin-top: 50px;
+            } 
+        */
+
+        /* #nav 요소가 화면 상단에 고정되면서, 즉 절대적인 위치에 배치되면서 #nav 요소의 영역이 없어지고,
+           그로 인해 #main 요소가 위로 올라오는 문제점이 있다.
+           이를 방지하기 위해 #nav 요소를 사전에 절대적인 위치에 배치하고, #content 요소의 상단에
+           여백을 설정해서 #nav 요소가 #main 요소의 콘텐츠를 가리지 않도록 함
+        */
+        /* 처음부터 #nav 요소를 절대적인 위치에 배치하고, #content 요소의 상단에 여백을 설정 */
+        #nav {
+            position: absolute;
+            width: 100%;
+        }
+        /* #main 요소의 상단에 #nav 요소의 높이만큼 여백을 설정(정확히 안 구하고 정확한 값보다 크기만 함면 됨) */
+        #content {padding-top: 60px;}
+        /* 이 때 css들한테 padding 주지 말고 margin으로 변경하자. */
+
+        /* nav아래에 스크롤 얼마나 됐는지 보여주는 인디게이터 */
+        #indicator {
+            /* nav요소 영역을 기준으로 아래 배치 */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            
+            /* 0%부터 시작해서 스크롤 하면 점점 채워지게 */
+            width: 0;
+            height: 5px;
+            background-color: #e8ac13;
+            transition-duration: 200ms;
+
+            /* #nav 요소가 화면 상단에 고정되지 않은 경우에는 #indicator 요소가 보이지 않도록 */
+            opacity: 0;
+        }
+        /* #nav 요소가 화면 상단에 고정되면 #indicator 요소가 보이도록 설정 */
+        #nav.fixed > #indicator {
+            opacity: 1;
+        }
+        
+
+        /* ---------------------------main--------------------------- */
+        #main {
+            padding: 10px 40px;
+        }
+        #main > section > h2 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        #main > section > p {
+            font-size: 17px;
+            line-height: 1.3;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        $(function(){
+
+            /** 1. 브라우저 화면이 스크롤 되면
+               1-1. 브라우저 화면이 스크롤 된 높이가 #nav 요소의 Y축상 위치보다 더 크면
+               1-2. #nav 요소를 화면 상단에 고정
+               1-3. 그렇지 않으면
+               1-4. #nav 요소를 본래 위치로 되돌림 
+            */
+
+            // ---------------------------------------------------------------------
+            // 프로그램에서 참조하는 jQuery 객체 미리 생성
+            const $window = $(window);
+            const $nav = $('#nav');
+
+            // #nav 요소의 Y축상 위치
+            const navTop = $nav.offset().top;
+
+            // #nav 요소의 margin을 포함하는 영역의 높이
+            // const navHeight = $nav.outerHeight(true);
+
+            // 1. 브라우저 화면이 스크롤 되면
+            $(window).on('scroll', function(){
+                // 브라우저 화면이 스크롤 된 높이
+                const scrollTop = $window.scrollTop();
+
+                /* 조건문 첫 번째 방법과 #main 요소가 위쪽으로 올라가는 문제점 해결 방법
+
+                // 1-1. 브라우저 화면이 스크롤 된 높이가 #nav 요소의 Y축상 위치보다 더 크면
+                if(scrollTop > navTop) {
+                    // 1-2. #nav 요소를 화면 상단에 고정
+                    // #nav 요소가 화면 상단에 고정되면 #main 요소가 위쪽으로 올라가는 문제점이 있음
+                    // 해결 방법1. [.next().css('margin-top', navHeight);]를 줌
+                    // 해결 방법2. css 47번째 줄 #nav.fixed + #main {margin-top: 50px;} 을 직접 위에서부터 nav아래까지 몇 픽셀인지 계산해서 주면 됨
+                    // 해결 방법3. css 54번째 줄 #nav를 처음부터 절대적인 위치에 배치
+                    $nav.addClass('fixed');
+                }
+                // 1-3. 그렇지 않으면
+                else {
+                    // 1-4. #nav 요소를 본래 위치로 되돌림 
+                    // 해결방법1. [.next().removeAttr('style');]를 줌
+                    $nav.removeClass('fixed');
+                }
+                */
+
+                // 위 조건문의 효율을 향상 시키기 위해 조건문의 조건 수정
+                // 1-1. #nav 요소가 화면 상단에 고정된 상태가 아니고, 브라우저 화면이 스크롤 된 높이가 #nav 요소의 Y축상 위치보다 더 크면
+                if(!$nav.is('.fixed') && scrollTop > navTop) {
+                    $nav.addClass('fixed');
+                }
+                // 1-3. #nav 요소가 화면 상단에 고정된 상태이고, 브라우저 화면이 스크롤 된 높이가 #nav 요소의 Y축상 위치보다 더 작으면
+                else if($nav.is('.fixed') && scrollTop < navTop){
+                    $nav.removeClass('fixed');
+                }
+
+                // 스크롤 인디케이터 너비 설정
+                setIndicator();
+                
+            });
+            
+
+            // 스크롤 인디케이터-----------------------------------------------------------------------------------------------------
+            // 스크롤 인디케이터 표현할 <span> 요소를 #nav 요소에 추가
+            // -> #indicator 요소의 너비를 설정해서 뷰포트가 얼마나 스크롤 됐는지 나타냄
+            // -> (화면이 스크롤 된 백분율) = (현재 화면 스크롤 높이) / (스크롤 높이의 최댓값) * 100
+            const $indicator = $('<span></span>').attr('id', 'indicator').appendTo($nav);
+
+            // 브라우저 화면이 스크롤 될 수 있는 최대 높이 = (HTML 문서의 높이) - (뷰포트의 높이) 창의 크기가 변할 때 둘 다 바뀔 수 있어 let으로 선언
+            let maxScrollTop = $(document).height() - $window.height();
+
+            // 브라우저 화면의 크기가 변하면, 브라우저 화면이 스크롤 될 수 있는 최대 높이도 바뀜------------------------------------------
+            // 그래서 resize 될 때 스크롤 될 수 있는 최대 높이와 인디케이터의 너비를 다시 설정해줘야 함
+            $window.on('resize', function(){
+                // 브라우저 화면이 스크롤 될 수 있는 최대 높이를 다시 계산
+                maxScrollTop = $(document).height() - $window.height();
+
+                // 스크롤 인디케이터의 너비 다시 설정
+                setIndicator();
+            });
+
+            // 스크롤 인디케이터 너비 설정--------------------------------------------------------------------------------------------
+            function setIndicator(){
+                // $indicator 요소의 너비를 설정
+                // 최대 스크롤 높이를 기준으로 현재 스크롤 높이의 백분율
+                // -> (화면이 스크롤 된 백분율) = (현재 화면 스크롤 높이) / (스크롤 높이의 최댓값) * 100
+                const percet = $window.scrollTop() / maxScrollTop * 100;
+                
+                // 스크롤 된 비율을 #indicator 요소의 너비로 설정
+                $indicator.css('width', percet + '%');
+            };
+
+
+
+
+
+            /* 처음 푼 것. 실패------------------------------------------------------------------------------------------------------
+
+            // 프로그램에서 참조하는 jQuery 객체 미리 생성
+            const $html = $('html');
+            const $window = $(window);
+            const $document = $(document);
+            const $nav = $('#nav');
+            const $indicator = $('#indicator');
+            let $navoffset = $nav.offset().top;
+            
+            // HTML 문서의 높이, 뷰포트의 높이
+            const $htmlHeight = $document.height();
+            let $viewHeight = $window.height();
+            console.log('문서의 높이 = ' + $htmlHeight);
+            console.log('뷰포트의 높이 = ' + $viewHeight);
+            
+            // 인디게이터 스크롤바
+            let $scroll = 0;
+
+            window.addEventListener('wheel', function(event){
+                
+
+                let $scrollTop = $window.scrollTop()
+
+                // 스크롤할 때 일정 높이까지 내려가면 nav요소가 맨 위에 찰싹 달라붙거나 떨어지는 기능
+                // 이렇게만 주면 문서의 일반적인 흐름에서 제거가 되니까 밑에 내용이 위로 훅 올라오는 문제점이 발생!!!
+                if($scrollTop > $navoffset){
+                    $nav.addClass('fixed');
+                }else if($scrollTop <= ($navoffset)){
+                    $nav.removeClass('fixed');
+                }
+
+                // 뭔가 전체 페이지를 퍼센트로 이러쿵저러쿵 계산 하고 싶은데
+                // 생각이 안난다...
+
+                // $scroll= $htmlHeight - $viewHeight;
+                // $indicator.css('width', `${$scroll}%`);
+                
+            });
+            */
+        });
+    </script>
+</head>
+<body>
+    <header id="header">
+        <h1><a href="#fixednavigationbar">Fixed Navigation Bar</a></h1>
+    </header>
+    <!-- // #header -->
+
+    <nav id="nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#html">HTML</a></li>
+            <li><a href="#css">CSS</a></li>
+            <li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#jquery">jQuery</a></li>
+        </ul>
+        <!-- 스크롤 인디게이터 자바스크립트에서 추가 -->
+    </nav>
+    <!-- // #nav -->
+
+    <main id="main">
+        <section>
+            <h2>Legends Never Die</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                They never lose hope when everything's cold and the fighting's near 
+                It's deep in their bones they run into smoke when the fire is fierce 
+                'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Legends never die 
+                When the world is calling out your name Begging you to fight Pick 
+                yourself up once more Pick yourself up, cause
+            </p>
+        </section>
+        <section>
+            <h2>Every time</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                They never lose hope when everything's cold and the fighting's near 
+                It's deep in their bones they run into smoke when the fire is fierce 
+                'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part 
+                of you Every time you bleed for reaching greatness Legends never die
+            </p>
+        </section>
+        <section>
+            <h2>written down</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                They never lose hope when everything's cold and the fighting's near 
+                It's deep in their bones they run into smoke when the fire is fierce 
+                'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part 
+                of you Every time you bleed for reaching greatness Legends never die
+            </p>
+        </section>
+        <section>
+            <h2>reaching greatness</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                They never lose hope when everything's cold and the fighting's near 
+                It's deep in their bones they run into smoke when the fire is fierce 
+                'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part 
+                of you Every time you bleed for reaching greatness Legends never die
+            </p>
+        </section>
+        <section>
+            <h2>lose hope</h2>
+            <p>Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of 
+                you Every time you bleed for reaching greatness Relentless you survive
+                They never lose hope when everything's cold and the fighting's near 
+                It's deep in their bones they run into smoke when the fire is fierce 
+                'Oh pick yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them 
+                screaming out your name? Legends never die they become a part of you
+                Every time you bleed for reaching greatness Legends never die
+                They're written down in eternity But you'll never see the price
+                it costs, the scars collected all their lives When everything's 
+                lost, they pick up their hearts and avenge defeat Before it all 
+                starts, they suffer through harm just to touch a dream 'Oh pick
+                yourself up, cause
+            </p>
+            <p>
+                Legends never die when the world is calling you Can you hear them
+                screaming out your name? Legends never die they become a part 
+                of you Every time you bleed for reaching greatness Legends never die
+            </p>
+        </section>
+    </main>
+    <!-- // #main -->
+</body>
+</html>
